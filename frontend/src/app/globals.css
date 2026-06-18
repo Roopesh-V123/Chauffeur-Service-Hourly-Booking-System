@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F8FAFC;
+  --foreground: #0B132B;
+}
+
+@theme {
+  --color-navy-dark: #0B132B;
+  --color-navy-medium: #1C2541;
+  --color-navy-light: #3A506B;
+  --color-navy-slate: #5C6B73;
+  --color-crisp-white: #FFFFFF;
+  --color-crisp-offwhite: #F8FAFC;
+  --color-crisp-lightgray: #E2E8F0;
+  --color-accent-cyan: #48CAE4;
+  --color-accent-blue: #0077B6;
+  --color-accent-gold: #D4AF37;
+  
+  --font-sans: var(--font-geist-sans), Inter, sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* ── Design System Audit: Unified Button Spacing & Sizes ── */
+@layer utilities {
+  .btn-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem; /* 12px */
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.625rem 1.25rem; /* Enforced padding matching 8px grid (10px x 20px) */
+    border-radius: 0.5rem; /* 8px rounding */
+    transition: all 200ms ease;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .btn-primary {
+    background-color: #0B132B; /* Navy Dark */
+    color: #FFFFFF;
+    border: 1px solid transparent;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0077B6; /* Accent Blue */
+  }
+
+  .btn-secondary {
+    background-color: #FFFFFF;
+    color: #0B132B;
+    border: 2px solid #0B132B;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #0B132B;
+    color: #FFFFFF;
+  }
+}
+
+/* ── 8px Spacing Grid Constraints Helpers ── */
+.gap-8px { gap: 0.5rem; }      /* 8px */
+.gap-16px { gap: 1rem; }       /* 16px */
+.gap-24px { gap: 1.5rem; }     /* 24px */
+.gap-32px { gap: 2rem; }       /* 32px */
+
+.p-8px { padding: 0.5rem; }    /* 8px */
+.p-16px { padding: 1rem; }     /* 16px */
+.p-24px { padding: 1.5rem; }   /* 24px */
+.p-32px { padding: 2rem; }     /* 32px */
+
+
