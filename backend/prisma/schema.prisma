@@ -1,0 +1,75 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum BookingStatus {
+  Active
+  Completed
+  Cancelled
+}
+
+enum PaymentStatus {
+  Pending
+  Paid
+  Failed
+}
+
+model Customer {
+  id        String    @id @default(uuid()) @db.Uuid
+  name      String    @db.VarChar(255)
+  email     String    @unique @db.VarChar(255)
+  phone     String    @db.VarChar(50)
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  bookings  ChauffeurServiceHourlyBooking[]
+
+  @@map("customers")
+}
+
+model Vehicle {
+  id          String    @id @default(uuid()) @db.Uuid
+  make        String    @db.VarChar(100)
+  model       String    @db.VarChar(100)
+  plateNumber String    @unique @map("plate_number") @db.VarChar(50)
+  category    String    @db.VarChar(100)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  bookings    ChauffeurServiceHourlyBooking[]
+
+  @@map("vehicles")
+}
+
+model ChauffeurServiceHourlyBooking {
+  id                  String        @id @default(uuid()) @db.Uuid
+  customerId          String        @map("customer_id") @db.Uuid
+  vehicleId           String        @map("vehicle_id") @db.Uuid
+  liveMeterAndBilling Int           @map("live_meter_and_billing") @db.Integer
+  status              BookingStatus @default(Active)
+  createdDate         DateTime      @map("created_date") @db.Date
+  notes               String?       @db.Text
+  createdAt           DateTime      @map("created_at") @db.Timestamp
+  updatedAt           DateTime      @updatedAt @map("updated_at") @db.Timestamp
+  customer            Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  vehicle             Vehicle       @relation(fields: [vehicleId], references: [id], onDelete: Restrict)
+  payments            Payment[]
+
+  @@map("chauffeur_service_hourly_bookings")
+}
+
+model Payment {
+  id                   String        @id @default(uuid()) @db.Uuid
+  bookingId            String        @map("booking_id") @db.Uuid
+  amount               Decimal       @db.Decimal(12, 2)
+  status               PaymentStatus @default(Pending)
+  transactionReference String?       @map("transaction_reference") @db.VarChar(255)
+  createdAt            DateTime      @default(now()) @map("created_at")
+  updatedAt            DateTime      @updatedAt @map("updated_at")
+  booking              ChauffeurServiceHourlyBooking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
