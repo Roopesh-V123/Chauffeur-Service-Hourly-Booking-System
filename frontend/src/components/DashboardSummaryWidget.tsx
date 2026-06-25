@@ -1,7 +1,51 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { KpiCardsSkeleton } from "./FeedbackStates";
+
+/**
+ * @hook useCountUp
+ * @description Animates a number from 0 up to `target` over `duration` ms.
+ * Returns the current animated display value.
+ * Uses easeOutExpo for a premium deceleration feel.
+ */
+function useCountUp(target: number, duration = 1200, trigger = true): number {
+  const [current, setCurrent] = useState(0);
+  const rafRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (!trigger || target === 0) {
+      setCurrent(target);
+      return;
+    }
+
+    // Reset to 0 every time target changes so the count-up replays
+    setCurrent(0);
+    startTimeRef.current = null;
+
+    const easeOutExpo = (t: number) =>
+      t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+    const step = (timestamp: number) => {
+      if (!startTimeRef.current) startTimeRef.current = timestamp;
+      const elapsed = timestamp - startTimeRef.current;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutExpo(progress);
+      setCurrent(Math.round(eased * target));
+      if (progress < 1) {
+        rafRef.current = requestAnimationFrame(step);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(step);
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
+  }, [target, duration, trigger]);
+
+  return current;
+}
 
 // Author: QA Reviewer (ID: MNVT-OP-9944)
 // Day 19: Dashboard Summary Widget
@@ -30,6 +74,11 @@ export default function DashboardSummaryWidget() {
   const [hoverBookings, setHoverBookings] = useState(false);
   const [hoverBalance, setHoverBalance] = useState(false);
   const [hoverAlerts, setHoverAlerts] = useState(false);
+
+  // ── Count-up animation values (animate from 0 → real value on data load) ──
+  const animatedBookings = useCountUp(data?.active_bookings_count ?? 0, 1200, !loading && !!data);
+  const animatedBalance  = useCountUp(data?.pending_payments_amount ?? 0, 1400, !loading && !!data);
+  const animatedPending  = useCountUp(data?.pending_payments_count ?? 0, 1200, !loading && !!data);
 
   // Mock data fallback if database or API is offline
   const mockSummary: DashboardSummaryData = {
@@ -197,7 +246,7 @@ export default function DashboardSummaryWidget() {
                 hoverBookings ? "text-accent-cyan kpi-num-hover" : ""
               }`}
             >
-              {data?.active_bookings_count}
+              {animatedBookings.toLocaleString("en-IN")}
             </h3>
             <p className="kpi-sublabel text-[10px] text-accent-cyan font-bold mt-2">
               Vehicles currently on trip
@@ -225,10 +274,10 @@ export default function DashboardSummaryWidget() {
                 hoverBalance ? "text-accent-gold kpi-num-hover" : ""
               }`}
             >
-              ₹{data?.pending_payments_amount.toLocaleString("en-IN")}
+              ₹{animatedBalance.toLocaleString("en-IN")}
             </h3>
             <p className="kpi-sublabel text-[10px] text-accent-gold font-bold mt-2">
-              Across {data?.pending_payments_count} pending invoices
+              Across {animatedPending} pending invoices
             </p>
           </div>
           <div className="kpi-icon-bubble w-12 h-12 rounded-full bg-accent-gold/10 flex items-center justify-center text-accent-gold flex-shrink-0 ml-2">
