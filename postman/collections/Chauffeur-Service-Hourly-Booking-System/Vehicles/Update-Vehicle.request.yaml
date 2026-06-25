@@ -1,0 +1,24 @@
+$kind: http-request
+name: Update Vehicle
+method: PUT
+url: '{{baseUrl}}/api/vehicles/{{vehicleId}}'
+order: 4000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "make": "Mercedes-Benz",
+      "model": "E-Class",
+      "plate_number": "AP-09-VR-2027",
+      "category": "Executive Sedan"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () { pm.response.to.have.status(200); });
+      pm.test("Response time is less than 2000ms", function () { pm.expect(pm.response.responseTime).to.be.below(2000); });
+      pm.test("Response has JSON body", function () { pm.response.to.be.json; });

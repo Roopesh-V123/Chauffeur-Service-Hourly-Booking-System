@@ -1,0 +1,22 @@
+$kind: http-request
+name: Search Vehicles
+method: GET
+url: '{{baseUrl}}/api/vehicles'
+order: 2000
+queryParams:
+  - key: search
+    value: Toyota
+  - key: category
+    value: 'Luxury SUV'
+  - key: page
+    value: '1'
+  - key: limit
+    value: '20'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () { pm.response.to.have.status(200); });
+      pm.test("Response time is less than 2000ms", function () { pm.expect(pm.response.responseTime).to.be.below(2000); });
+      pm.test("Response has JSON body", function () { pm.response.to.be.json; });
+      pm.test("Response contains data array", function () { var jsonData = pm.response.json(); pm.expect(jsonData).to.have.property("data"); pm.expect(jsonData.data).to.be.an("array"); });

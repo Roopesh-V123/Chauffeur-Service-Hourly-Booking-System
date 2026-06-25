@@ -1,0 +1,18 @@
+$kind: collection
+name: Chauffeur Service Hourly Booking System
+description: |-
+  Complete API test collection for the Chauffeur Service Hourly Booking System.
+  Built and maintained by V.Roopesh.
+  Base URL: http://localhost:5000
+  Covers: Bookings, Payments, Customers, Vehicles, Dashboard, Reports, Health.
+variables:
+  - key: baseUrl
+    value: 'http://localhost:5000'
+  - key: bookingId
+    value: 'BOOKING_UUID_HERE'
+  - key: customerId
+    value: 'CUSTOMER_UUID_HERE'
+  - key: vehicleId
+    value: 'VEHICLE_UUID_HERE'
+  - key: paymentId
+    value: 'PAYMENT_UUID_HERE'

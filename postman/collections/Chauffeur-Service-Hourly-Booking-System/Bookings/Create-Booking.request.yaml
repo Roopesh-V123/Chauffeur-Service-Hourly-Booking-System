@@ -1,0 +1,27 @@
+$kind: http-request
+name: Create Booking
+method: POST
+url: '{{baseUrl}}/api/chauffeur_service_hourly_booking'
+order: 5000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "live_meter_and_billing": 6,
+      "status": "Active",
+      "created_date": "2026-06-25",
+      "notes": "Airport pickup for V.Roopesh — Terminal 2, IndiGo flight 6E-204. Requires premium sedan with AC.",
+      "customer_id": "{{customerId}}",
+      "vehicle_id": "{{vehicleId}}"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 201 Created", function () { pm.response.to.have.status(201); });
+      pm.test("Response time is less than 2000ms", function () { pm.expect(pm.response.responseTime).to.be.below(2000); });
+      pm.test("Response has JSON body", function () { pm.response.to.be.json; });
+      pm.test("Response contains id field", function () { var jsonData = pm.response.json(); pm.expect(jsonData).to.have.property("id"); });

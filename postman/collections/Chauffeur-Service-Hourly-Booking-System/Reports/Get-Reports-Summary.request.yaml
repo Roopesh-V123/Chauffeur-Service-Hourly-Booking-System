@@ -1,0 +1,17 @@
+$kind: http-request
+name: Get Reports Summary
+method: GET
+url: '{{baseUrl}}/api/reports/summary'
+order: 1000
+queryParams:
+  - key: from
+    value: '2026-01-01'
+  - key: to
+    value: '2026-06-25'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () { pm.response.to.have.status(200); });
+      pm.test("Response time is less than 2000ms", function () { pm.expect(pm.response.responseTime).to.be.below(2000); });
+      pm.test("Response has JSON body", function () { pm.response.to.be.json; });

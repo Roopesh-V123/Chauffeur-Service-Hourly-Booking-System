@@ -1,0 +1,26 @@
+$kind: http-request
+name: Update Booking
+method: PUT
+url: '{{baseUrl}}/api/chauffeur_service_hourly_booking/{{bookingId}}'
+order: 6000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "live_meter_and_billing": 8,
+      "status": "Active",
+      "created_date": "2026-06-25",
+      "notes": "Updated booking for V.Roopesh — extended to 8 hours. Added city tour after airport drop.",
+      "customer_id": "{{customerId}}",
+      "vehicle_id": "{{vehicleId}}"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () { pm.response.to.have.status(200); });
+      pm.test("Response time is less than 2000ms", function () { pm.expect(pm.response.responseTime).to.be.below(2000); });
+      pm.test("Response has JSON body", function () { pm.response.to.be.json; });

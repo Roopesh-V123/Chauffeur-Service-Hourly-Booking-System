@@ -1,0 +1,19 @@
+$kind: http-request
+name: Get Bookings Filtered
+method: GET
+url: '{{baseUrl}}/api/chauffeur_service_hourly_booking'
+order: 9000
+queryParams:
+  - key: status
+    value: Active
+  - key: page
+    value: '1'
+  - key: limit
+    value: '10'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () { pm.response.to.have.status(200); });
+      pm.test("Response time is less than 2000ms", function () { pm.expect(pm.response.responseTime).to.be.below(2000); });
+      pm.test("Response has JSON body", function () { pm.response.to.be.json; });
