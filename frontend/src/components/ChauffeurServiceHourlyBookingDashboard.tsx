@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ChauffeurServiceHourlyBookingEditForm from "./ChauffeurServiceHourlyBookingEditForm";
 import ChauffeurServiceHourlyBookingDetail from "./ChauffeurServiceHourlyBookingDetail";
-import { LoadingSpinner, EmptyStateMessage } from "./FeedbackStates";
+import { TableRowSkeleton, EmptyStateMessage } from "./FeedbackStates";
 
 /**
  * @module ChauffeurServiceHourlyBookingDashboard
@@ -241,7 +241,7 @@ export default function ChauffeurServiceHourlyBookingDashboard() {
 
       {/* Reusable Loading & Empty Feedback States */}
       {loading ? (
-        <LoadingSpinner message="Synchronizing database rows..." />
+        <TableRowSkeleton />
       ) : bookings.length === 0 ? (
         <EmptyStateMessage
           title="No Records Found"

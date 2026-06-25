@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { ReportsSkeleton } from "./FeedbackStates";
 
 // Author: QA Reviewer (ID: MNVT-OP-9944)
 // Day 18: REVIEW PRESENTATION 2 — Day 2 + Reports & Analytics Dashboard
@@ -625,10 +626,7 @@ export default function ReportsAnalyticsDashboard() {
       )}
 
       {loading ? (
-        <div className="h-64 flex flex-col items-center justify-center space-y-4">
-          <div className="w-8 h-8 border-4 border-accent-blue border-t-transparent rounded-full animate-spin" />
-          <p className="text-xs font-bold text-navy-slate uppercase tracking-wider">Loading report data...</p>
-        </div>
+        <ReportsSkeleton />
       ) : (
         <>
           {/* Summary KPI Cards Grid */}

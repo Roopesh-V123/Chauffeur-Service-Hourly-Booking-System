@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { BookingDetailSkeleton } from "./FeedbackStates";
 
 // Author: QA Reviewer (ID: MNVT-OP-9944)
 // Day 20: Comprehensive Booking Detail View
@@ -142,14 +143,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
   };
 
   if (loading) {
-    return (
-      <div className="bg-crisp-white border border-crisp-lightgray rounded-2xl p-12 shadow-lg flex flex-col items-center justify-center space-y-4 h-96">
-        <div className="w-10 h-10 border-4 border-accent-blue border-t-transparent rounded-full animate-spin" />
-        <p className="text-xs font-black text-navy-slate uppercase tracking-widest">
-          Loading booking specifications...
-        </p>
-      </div>
-    );
+    return <BookingDetailSkeleton />;
   }
 
   if (!booking) {

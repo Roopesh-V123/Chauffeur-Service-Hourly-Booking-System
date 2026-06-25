@@ -17,6 +17,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { BookingPageSkeleton } from "@/components/FeedbackStates";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TypeScript Interfaces — Deeply Nested Booking Schema
@@ -399,16 +400,7 @@ export default function BookingDetailPage() {
 
   // ── Loading State ─────────────────────────────────────────────────────────
   if (loading) {
-    return (
-      <div className="min-h-screen bg-crisp-offwhite flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 rounded-full border-4 border-accent-blue border-t-transparent animate-spin" />
-          <p className="text-xs font-black text-navy-slate uppercase tracking-widest">
-            Fetching booking specifications…
-          </p>
-        </div>
-      </div>
-    );
+    return <BookingPageSkeleton />;
   }
 
   if (!rawBooking) {

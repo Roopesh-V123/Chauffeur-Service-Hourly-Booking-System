@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { KpiCardsSkeleton } from "./FeedbackStates";
 
 // Author: QA Reviewer (ID: MNVT-OP-9944)
 // Day 19: Dashboard Summary Widget
@@ -85,13 +86,7 @@ export default function DashboardSummaryWidget() {
   }, []);
 
   if (loading && !data) {
-    return (
-      <div className="bg-crisp-white/60 backdrop-blur-md border border-crisp-lightgray rounded-2xl p-6 shadow-lg animate-pulse flex items-center justify-center h-48 mb-8">
-        <p className="text-xs font-bold text-navy-slate uppercase tracking-widest">
-          Loading metrics summaries...
-        </p>
-      </div>
-    );
+    return <KpiCardsSkeleton />;
   }
 
   return (
