@@ -156,7 +156,7 @@ export default function ChauffeurServiceHourlyBookingEditForm({
                     type="number"
                     value={formData.live_meter_and_billing}
                     onChange={handleChange}
-                    className={`w-full pl-8 pr-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white text-sm font-semibold transition-all ${
+                    className={`w-full pl-8 pr-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-foreground text-sm font-semibold transition-all ${
                       errors.live_meter_and_billing
                         ? "border-rose-500 ring-2 ring-rose-950/40"
                         : "border-border-color/30"
@@ -183,11 +183,11 @@ export default function ChauffeurServiceHourlyBookingEditForm({
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white text-sm font-semibold cursor-pointer transition-all"
+                  className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-foreground text-sm font-semibold cursor-pointer transition-all"
                 >
-                  <option value="Active" className="bg-surface text-white">Active</option>
-                  <option value="Completed" className="bg-surface text-white">Completed</option>
-                  <option value="Cancelled" className="bg-surface text-white">Cancelled</option>
+                  <option value="Active" className="bg-surface text-foreground">Active</option>
+                  <option value="Completed" className="bg-surface text-foreground">Completed</option>
+                  <option value="Cancelled" className="bg-surface text-foreground">Cancelled</option>
                 </select>
               </div>
 
@@ -201,7 +201,7 @@ export default function ChauffeurServiceHourlyBookingEditForm({
                   name="created_date"
                   value={formData.created_date}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-accent-active transition-all"
+                  className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg text-foreground text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-accent-active transition-all"
                 />
               </div>
             </div>
@@ -220,7 +220,7 @@ export default function ChauffeurServiceHourlyBookingEditForm({
                 rows={3}
                 value={formData.notes}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white text-sm font-semibold resize-none transition-all ${
+                className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-foreground text-sm font-semibold resize-none transition-all ${
                   errors.notes
                     ? "border-rose-500 ring-2 ring-rose-950/40"
                     : "border-border-color/30"
@@ -236,7 +236,7 @@ export default function ChauffeurServiceHourlyBookingEditForm({
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 py-3 bg-[#1e1e1e] hover:bg-[#2a2a2a] text-white font-bold rounded-lg text-xs tracking-wide transition-all border border-border-color/30 active:scale-[0.98]"
+                className="flex-1 py-3 bg-navy-light hover:bg-surface-light text-foreground font-bold rounded-lg text-xs tracking-wide transition-all border border-border-color/30 active:scale-[0.98]"
               >
                 Cancel
               </button>

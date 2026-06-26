@@ -256,7 +256,7 @@ export default function ChauffeurServiceHourlyBookingDashboard() {
         <div className="overflow-x-auto rounded-xl border border-border-color/20 shadow-md">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-[#1a1a1a]/80 border-b border-border-color/20 text-muted text-[11px] font-bold uppercase tracking-wider">
+              <tr className="bg-surface border-b border-border-color/20 text-muted text-[11px] font-bold uppercase tracking-wider">
                 <th className="py-4 px-5">Billing Meter (₹)</th>
                 <th className="py-4 px-5">Pickup Date</th>
                 <th className="py-4 px-5">Chauffeur Notes</th>
@@ -264,13 +264,13 @@ export default function ChauffeurServiceHourlyBookingDashboard() {
                 <th className="py-4 px-5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border-color/10 text-sm font-semibold text-white bg-surface">
+            <tbody className="divide-y divide-border-color/10 text-sm font-semibold text-foreground bg-surface">
               {bookings.map((booking) => (
                 <tr
                   key={booking.id}
                   style={{ transition: "background 0.18s ease, box-shadow 0.18s ease" }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLTableRowElement).style.background = "#1e1e1e";
+                    (e.currentTarget as HTMLTableRowElement).style.background = "var(--surface-light)";
                     (e.currentTarget as HTMLTableRowElement).style.boxShadow = "inset 3px 0 0 #008542";
                   }}
                   onMouseLeave={(e) => {
@@ -312,11 +312,11 @@ export default function ChauffeurServiceHourlyBookingDashboard() {
                       {/* View Detail */}
                       <button
                         onClick={() => handleOpenDetail(booking.id)}
-                        className="px-3 py-1.5 bg-[#1e1e1e] text-white font-bold rounded-lg text-[11px] tracking-wide border border-border-color/30 shadow-sm active:scale-95"
+                        className="px-3 py-1.5 bg-navy-light text-foreground font-bold rounded-lg text-[11px] tracking-wide border border-border-color/30 shadow-sm active:scale-95"
                         style={{ transition: "background 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease" }}
                         onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLButtonElement).style.background = "#2a2a2a";
-                          (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 4px 12px rgba(0,0,0,0.4)";
+                          (e.currentTarget as HTMLButtonElement).style.background = "var(--btn-secondary-hover-bg)";
+                          (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 4px 12px var(--shadow-color)";
                           (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)";
                         }}
                         onMouseLeave={(e) => {
@@ -420,7 +420,7 @@ export default function ChauffeurServiceHourlyBookingDashboard() {
             <div className="flex gap-3">
               <button
                 onClick={() => setConfirmAction(null)}
-                className="flex-1 py-3 bg-[#1e1e1e] hover:bg-[#2a2a2a] text-white font-bold rounded-lg text-xs tracking-wide transition-all border border-border-color/30 active:scale-[0.98]"
+                className="flex-1 py-3 bg-navy-light hover:bg-surface-light text-foreground font-bold rounded-lg text-xs tracking-wide transition-all border border-border-color/30 active:scale-[0.98]"
               >
                 Cancel
               </button>

@@ -323,7 +323,7 @@ export default function ChauffeurServiceCoreLogicResult() {
           {invoiceId && (
             <p className="font-semibold text-emerald-400">
               Payment UUID:{" "}
-              <span className="font-mono bg-[#1e1e1e] px-1.5 py-0.5 rounded text-[10px] border border-border-color/30 text-white">
+              <span className="font-mono bg-navy-light px-1.5 py-0.5 rounded text-[10px] border border-border-color/30 text-foreground">
                 {invoiceId}
               </span>
             </p>
@@ -335,7 +335,7 @@ export default function ChauffeurServiceCoreLogicResult() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <button
           onClick={handleDownloadLedger}
-          className="py-3 bg-[#1e1e1e] hover:bg-[#2a2a2a] border border-border-color/30 text-white font-bold rounded-lg text-xs tracking-wider transition-all active:scale-[0.98]"
+          className="py-3 bg-navy-light hover:bg-surface-light border border-border-color/30 text-foreground font-bold rounded-lg text-xs tracking-wider transition-all active:scale-[0.98]"
         >
           Download Calculation Ledger
         </button>
@@ -344,7 +344,7 @@ export default function ChauffeurServiceCoreLogicResult() {
           disabled={isAuthorizing || authSuccess}
           className={`py-3 font-bold rounded-lg text-xs tracking-wider transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-2 ${
             isAuthorizing || authSuccess
-              ? "bg-[#1e1e1e]/60 text-white/80 cursor-not-allowed"
+              ? "bg-navy-light/60 text-muted/80 cursor-not-allowed"
               : "bg-accent-active hover:bg-accent-active/85 text-white cursor-pointer"
           }`}
         >

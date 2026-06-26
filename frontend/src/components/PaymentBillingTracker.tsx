@@ -162,7 +162,7 @@ export default function PaymentBillingTracker() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-surface border border-border-color/30 rounded-2xl shadow-xl p-6 sm:p-8 transition-all duration-300 hover:shadow-2xl text-white">
+    <div className="relative overflow-hidden bg-surface border border-border-color/30 rounded-2xl shadow-xl p-6 sm:p-8 transition-all duration-300 hover:shadow-2xl text-foreground">
       {/* Visual Accent Bar */}
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent-active to-accent-pending" />
 
@@ -171,7 +171,7 @@ export default function PaymentBillingTracker() {
         <div className="flex items-center space-x-3">
           <div className="w-3 h-6 bg-accent-active rounded-full" />
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">
               Payment &amp; Billing Tracker
             </h2>
             <p className="text-[10px] text-muted font-bold uppercase tracking-wider mt-0.5">
@@ -204,10 +204,10 @@ export default function PaymentBillingTracker() {
               value={selectedId}
               onChange={handleBookingChange}
               disabled={isSubmitting}
-              className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active text-white text-sm font-semibold cursor-pointer transition-all"
+              className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active text-foreground text-sm font-semibold cursor-pointer transition-all"
             >
               {bookings.map((b) => (
-                <option key={b.id} value={b.id} className="bg-surface text-white">
+                <option key={b.id} value={b.id} className="bg-surface text-foreground">
                   ₹{b.liveMeterAndBilling.toLocaleString("en-IN")} — {b.customer?.name || "Unknown"} ({b.status}) — {new Date(b.createdDate).toLocaleDateString("en-IN")}
                 </option>
               ))}
@@ -227,19 +227,19 @@ export default function PaymentBillingTracker() {
               </p>
               <div className="flex justify-between text-sm">
                 <span className="text-muted">Base Fare</span>
-                <span className="font-semibold text-white">₹{billing.baseTotal.toFixed(2)}</span>
+                <span className="font-semibold text-foreground">₹{billing.baseTotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted">Peak Hour Surcharge (+15%)</span>
-                <span className="font-semibold text-white">₹{billing.peakSurcharge.toFixed(2)}</span>
+                <span className="font-semibold text-foreground">₹{billing.peakSurcharge.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm border-t border-border-color/20 pt-3">
                 <span className="text-muted">GST Tax (18%)</span>
-                <span className="font-semibold text-white">₹{billing.gst.toFixed(2)}</span>
+                <span className="font-semibold text-foreground">₹{billing.gst.toFixed(2)}</span>
               </div>
               <div className="flex justify-between items-center border-t border-border-color/20 pt-3">
-                <span className="text-white font-black">Total Amount</span>
-                <span className="text-xl font-black text-white">₹{billing.total.toLocaleString("en-IN")}</span>
+                <span className="text-foreground font-black">Total Amount</span>
+                <span className="text-xl font-black text-foreground">₹{billing.total.toLocaleString("en-IN")}</span>
               </div>
             </div>
           )}
@@ -259,7 +259,7 @@ export default function PaymentBillingTracker() {
                   className={`py-2.5 px-3 rounded-lg text-xs font-bold border transition-all ${
                     method === m
                       ? "bg-accent-active text-white border-accent-active shadow-md"
-                      : "bg-[#1e1e1e] text-white border-border-color/30 hover:bg-[#2a2a2a]"
+                      : "bg-navy-light text-foreground border-border-color/30 hover:bg-surface-light"
                   }`}
                 >
                   {PAYMENT_METHOD_LABELS[m]}
@@ -280,7 +280,7 @@ export default function PaymentBillingTracker() {
               disabled={isSubmitting}
               onChange={(e) => setTransactionRef(e.target.value)}
               placeholder="e.g. TXN-UPI-9944, NEFT-REF-001..."
-              className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active text-white text-sm font-semibold placeholder-muted transition-all"
+              className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active text-foreground text-sm font-semibold placeholder-muted transition-all"
             />
           </div>
 
@@ -304,7 +304,7 @@ export default function PaymentBillingTracker() {
               <ul className="space-y-1 font-semibold text-emerald-400">
                 <li>
                   <strong>Payment UUID:</strong>{" "}
-                  <span className="font-mono bg-[#1e1e1e] px-1.5 py-0.5 rounded text-[10px] border border-border-color/30 text-white">
+                  <span className="font-mono bg-navy-light px-1.5 py-0.5 rounded text-[10px] border border-border-color/30 text-foreground">
                     {paymentResult.id}
                   </span>
                 </li>
@@ -326,7 +326,7 @@ export default function PaymentBillingTracker() {
             <button
               onClick={() => window.print()}
               disabled={isSubmitting}
-              className="py-3 bg-[#1e1e1e] hover:bg-[#2a2a2a] text-white font-bold rounded-lg border border-border-color/30 transition-all text-sm"
+              className="py-3 bg-navy-light hover:bg-surface-light text-foreground font-bold rounded-lg border border-border-color/30 transition-all text-sm"
             >
               Print Invoice
             </button>

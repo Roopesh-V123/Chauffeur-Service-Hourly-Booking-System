@@ -600,13 +600,13 @@ export default function ReportsAnalyticsDashboard() {
     : "0.0";
 
   return (
-    <div className="bg-surface border border-border-color/30 rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl text-white">
+    <div className="bg-surface border border-border-color/30 rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl text-foreground">
       {/* Header Banner */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-8 border-b border-border-color/30 pb-6">
         <div>
           <div className="flex items-center space-x-3 mb-1">
             <div className="w-3.5 h-6 bg-accent-active rounded-full" />
-            <h2 className="text-2xl font-bold text-white tracking-tight">Reports & Performance Analytics</h2>
+            <h2 className="text-2xl font-bold text-foreground tracking-tight">Reports & Performance Analytics</h2>
           </div>
           <p className="text-xs text-muted font-medium">
             Authorized QA review console for pricing audit. Supervisor: QA Reviewer (ID: MNVT-OP-9944)
@@ -626,7 +626,7 @@ export default function ReportsAnalyticsDashboard() {
       </div>
 
       {/* Control Filters Panel */}
-      <div className="bg-[#1a1a1a]/40 border border-border-color/20 rounded-xl p-6 mb-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="bg-surface/40 border border-border-color/20 rounded-xl p-6 mb-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Date Filter Inputs */}
         <div className="grid grid-cols-2 gap-4 col-span-2">
           <div>
@@ -635,7 +635,7 @@ export default function ReportsAnalyticsDashboard() {
               type="date"
               value={fromDate}
               onChange={(e) => setFromDate(e.target.value)}
-              className="w-full bg-surface border border-border-color/30 rounded-lg px-3 py-2 text-xs font-bold text-white focus:outline-none focus:ring-2 focus:ring-accent-active"
+              className="w-full bg-surface border border-border-color/30 rounded-lg px-3 py-2 text-xs font-bold text-foreground focus:outline-none focus:ring-2 focus:ring-accent-active"
             />
           </div>
           <div>
@@ -644,7 +644,7 @@ export default function ReportsAnalyticsDashboard() {
               type="date"
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
-              className="w-full bg-surface border border-border-color/30 rounded-lg px-3 py-2 text-xs font-bold text-white focus:outline-none focus:ring-2 focus:ring-accent-active"
+              className="w-full bg-surface border border-border-color/30 rounded-lg px-3 py-2 text-xs font-bold text-foreground focus:outline-none focus:ring-2 focus:ring-accent-active"
             />
           </div>
         </div>
@@ -655,7 +655,7 @@ export default function ReportsAnalyticsDashboard() {
           <select
             value={activeMode}
             onChange={(e) => setActiveMode(e.target.value as ModeType)}
-            className="w-full bg-surface border border-border-color/30 rounded-lg px-3 py-2 text-xs font-bold text-white focus:outline-none focus:ring-2 focus:ring-accent-active cursor-pointer"
+            className="w-full bg-surface border border-border-color/30 rounded-lg px-3 py-2 text-xs font-bold text-foreground focus:outline-none focus:ring-2 focus:ring-accent-active cursor-pointer"
           >
             <option value="real">Real Database API</option>
             <option value="mock_zero">Simulated: 0 Records (Empty State)</option>
@@ -681,33 +681,33 @@ export default function ReportsAnalyticsDashboard() {
         <>
           {/* Summary KPI Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div className="bg-[#1a1a1a]/50 border border-border-color/20 rounded-lg p-5">
+            <div className="bg-surface border border-border-color/20 rounded-lg p-5">
               <span className="text-[10px] text-muted font-black uppercase tracking-wider block mb-1">Total Bookings</span>
               <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-white">{animatedTotalBookings.toLocaleString("en-IN")}</span>
+                <span className="text-2xl font-black text-foreground">{animatedTotalBookings.toLocaleString("en-IN")}</span>
                 <span className="text-[10px] text-accent-active font-bold">Live Status</span>
               </div>
             </div>
-            <div className="bg-[#1a1a1a]/50 border border-border-color/20 rounded-lg p-5">
+            <div className="bg-surface border border-border-color/20 rounded-lg p-5">
               <span className="text-[10px] text-muted font-black uppercase tracking-wider block mb-1">Gross Revenue</span>
               <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-white">
+                <span className="text-2xl font-black text-foreground">
                   ₹{animatedRevenue.toLocaleString("en-IN")}
                 </span>
                 <span className="text-[10px] text-accent-active font-bold">18% GST Inc.</span>
               </div>
             </div>
-            <div className="bg-[#1a1a1a]/50 border border-border-color/20 rounded-lg p-5">
+            <div className="bg-surface border border-border-color/20 rounded-lg p-5">
               <span className="text-[10px] text-muted font-black uppercase tracking-wider block mb-1">Billed Hours</span>
               <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-white">{animatedHours.toLocaleString("en-IN")} hrs</span>
+                <span className="text-2xl font-black text-foreground">{animatedHours.toLocaleString("en-IN")} hrs</span>
                 <span className="text-[10px] text-muted font-bold">Meter Duration</span>
               </div>
             </div>
-            <div className="bg-[#1a1a1a]/50 border border-border-color/20 rounded-lg p-5">
+            <div className="bg-surface border border-border-color/20 rounded-lg p-5">
               <span className="text-[10px] text-muted font-black uppercase tracking-wider block mb-1">Average Duration</span>
               <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-white">{animatedAvgDuration} hrs</span>
+                <span className="text-2xl font-black text-foreground">{animatedAvgDuration} hrs</span>
                 <span className="text-[10px] text-accent-pending font-bold">Per Booking</span>
               </div>
             </div>
@@ -716,16 +716,16 @@ export default function ReportsAnalyticsDashboard() {
           {/* Charts Panel */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Status Bar Chart */}
-            <div className="lg:col-span-1 border border-border-color/20 rounded-lg p-6 bg-[#1a1a1a]/50">
-              <h3 className="text-sm font-bold text-white mb-4 uppercase tracking-wider">
+            <div className="lg:col-span-1 border border-border-color/20 rounded-lg p-6 bg-surface">
+              <h3 className="text-sm font-bold text-foreground mb-4 uppercase tracking-wider">
                 Booking Status Metrics
               </h3>
               {renderStatusChart()}
             </div>
 
             {/* Performance Time Series Line Chart */}
-            <div className="lg:col-span-2 border border-border-color/20 rounded-lg p-6 bg-[#1a1a1a]/50">
-              <h3 className="text-sm font-bold text-white mb-4 uppercase tracking-wider">
+            <div className="lg:col-span-2 border border-border-color/20 rounded-lg p-6 bg-surface">
+              <h3 className="text-sm font-bold text-foreground mb-4 uppercase tracking-wider">
                 30-Day Revenue Trend (INR)
               </h3>
               {renderTrendChart()}

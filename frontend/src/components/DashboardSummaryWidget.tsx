@@ -243,7 +243,7 @@ export default function DashboardSummaryWidget() {
               Active Bookings
             </span>
             <h3
-              className={`text-3xl font-black text-white leading-none transition-colors duration-200 ${
+              className={`text-3xl font-black text-foreground leading-none transition-colors duration-200 ${
                 hoverBookings ? "text-accent-active kpi-num-hover" : ""
               }`}
             >
@@ -271,7 +271,7 @@ export default function DashboardSummaryWidget() {
               Pending Balance
             </span>
             <h3
-              className={`text-3xl font-black text-white leading-none text-ellipsis overflow-hidden max-w-[150px] transition-colors duration-200 ${
+              className={`text-3xl font-black text-foreground leading-none text-ellipsis overflow-hidden max-w-[150px] transition-colors duration-200 ${
                 hoverBalance ? "text-accent-pending kpi-num-hover" : ""
               }`}
             >

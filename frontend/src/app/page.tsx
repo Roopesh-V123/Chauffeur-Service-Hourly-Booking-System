@@ -11,7 +11,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ChauffeurServiceHourlyBookingEntryForm from "@/components/ChauffeurServiceHourlyBookingEntryForm";
 import ChauffeurServiceHourlyBookingDashboard from "@/components/ChauffeurServiceHourlyBookingDashboard";
 import PaymentBillingTracker from "@/components/PaymentBillingTracker";
@@ -68,6 +68,24 @@ const navItems = [
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>("Dashboard");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") as "dark" | "light";
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    localStorage.setItem("theme", nextTheme);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex">
@@ -77,8 +95,8 @@ export default function Home() {
         style={{
           width: sidebarCollapsed ? "72px" : "260px",
           transition: "width 300ms cubic-bezier(0.4,0,0.2,1)",
-          background: "linear-gradient(180deg, #121212 0%, #000000 100%)",
-          borderRight: "1px solid rgba(100, 116, 139, 0.2)",
+          background: "linear-gradient(180deg, var(--sidebar-gradient-start) 0%, var(--sidebar-gradient-end) 100%)",
+          borderRight: "1px solid var(--sidebar-border)",
           flexShrink: 0,
           display: "flex",
           flexDirection: "column",
@@ -87,7 +105,7 @@ export default function Home() {
           left: 0,
           bottom: 0,
           zIndex: 50,
-          boxShadow: "4px 0 24px 0 rgba(0,0,0,0.5)",
+          boxShadow: "4px 0 24px 0 var(--shadow-color)",
           overflow: "hidden",
         }}
       >
@@ -98,7 +116,7 @@ export default function Home() {
             display: "flex",
             alignItems: "center",
             gap: "14px",
-            borderBottom: "1px solid rgba(100, 116, 139, 0.15)",
+            borderBottom: "1px solid var(--sidebar-border)",
             minHeight: "88px",
             transition: "padding 300ms ease",
           }}
@@ -124,7 +142,7 @@ export default function Home() {
           </div>
           {!sidebarCollapsed && (
             <div style={{ overflow: "hidden" }}>
-              <div style={{ color: "#fff", fontWeight: 800, fontSize: "0.95rem", whiteSpace: "nowrap", lineHeight: 1.2 }}>
+              <div style={{ color: "var(--foreground)", fontWeight: 800, fontSize: "0.95rem", whiteSpace: "nowrap", lineHeight: 1.2 }}>
                 Manivtha Tours
               </div>
               <div style={{ color: "#008542", fontWeight: 700, fontSize: "0.6rem", letterSpacing: "0.13em", textTransform: "uppercase", marginTop: "3px", whiteSpace: "nowrap" }}>
@@ -137,7 +155,7 @@ export default function Home() {
         {/* Nav Section Label */}
         {!sidebarCollapsed && (
           <div style={{ padding: "20px 24px 8px 24px" }}>
-            <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" }}>
+            <span style={{ color: "var(--sidebar-label)", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase" }}>
               Navigation
             </span>
           </div>
@@ -167,7 +185,7 @@ export default function Home() {
                   background: isActive
                     ? "linear-gradient(135deg, rgba(0,133,66,0.85), rgba(0,133,66,0.18))"
                     : "transparent",
-                  color: isActive ? "#fff" : "rgba(255,255,255,0.55)",
+                  color: isActive ? "#fff" : "var(--sidebar-nav-inactive-fg)",
                   boxShadow: isActive ? "0 2px 12px rgba(0,133,66,0.25)" : "none",
                   borderLeft: isActive && !sidebarCollapsed ? "3px solid #008542" : "3px solid transparent",
                   marginLeft: sidebarCollapsed ? "0" : undefined,
@@ -175,14 +193,14 @@ export default function Home() {
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.06)";
-                    (e.currentTarget as HTMLButtonElement).style.color = "#fff";
+                    (e.currentTarget as HTMLButtonElement).style.background = "var(--surface-light)";
+                    (e.currentTarget as HTMLButtonElement).style.color = "var(--foreground)";
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isActive) {
                     (e.currentTarget as HTMLButtonElement).style.background = "transparent";
-                    (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.55)";
+                    (e.currentTarget as HTMLButtonElement).style.color = "var(--sidebar-nav-inactive-fg)";
                   }
                 }}
               >
@@ -190,7 +208,7 @@ export default function Home() {
                 {!sidebarCollapsed && (
                   <div style={{ textAlign: "left", overflow: "hidden" }}>
                     <div style={{ fontWeight: 700, fontSize: "0.82rem", whiteSpace: "nowrap", letterSpacing: "0.01em" }}>{item.label}</div>
-                    <div style={{ fontSize: "0.65rem", color: isActive ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.3)", whiteSpace: "nowrap", marginTop: "1px" }}>{item.description}</div>
+                    <div style={{ fontSize: "0.65rem", color: isActive ? "rgba(255,255,255,0.6)" : "var(--muted)", whiteSpace: "nowrap", marginTop: "1px" }}>{item.description}</div>
                   </div>
                 )}
               </button>
@@ -205,7 +223,7 @@ export default function Home() {
               <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#008542", display: "inline-block", animation: "pulse 2s infinite" }} />
               <span style={{ color: "#008542", fontWeight: 700, fontSize: "0.68rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>System Live</span>
             </div>
-            <div style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.62rem", marginTop: "4px" }}>Integration Dashboard Active</div>
+            <div style={{ color: "var(--muted)", fontSize: "0.62rem", marginTop: "4px" }}>Integration Dashboard Active</div>
           </div>
         )}
 
@@ -217,9 +235,9 @@ export default function Home() {
             margin: "0 12px 16px 12px",
             padding: "10px",
             borderRadius: "8px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            background: "rgba(255,255,255,0.04)",
-            color: "rgba(255,255,255,0.5)",
+            border: "1px solid var(--border)",
+            background: "var(--surface)",
+            color: "var(--muted)",
             cursor: "pointer",
             display: "flex",
             alignItems: "center",
@@ -228,12 +246,12 @@ export default function Home() {
           }}
           title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.1)";
-            (e.currentTarget as HTMLButtonElement).style.color = "#fff";
+            (e.currentTarget as HTMLButtonElement).style.background = "var(--surface-light)";
+            (e.currentTarget as HTMLButtonElement).style.color = "var(--foreground)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.04)";
-            (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.5)";
+            (e.currentTarget as HTMLButtonElement).style.background = "var(--surface)";
+            (e.currentTarget as HTMLButtonElement).style.color = "var(--muted)";
           }}
         >
           <svg
@@ -254,14 +272,14 @@ export default function Home() {
           display: "flex",
           flexDirection: "column",
           minHeight: "100vh",
-          backgroundColor: "#000000",
+          backgroundColor: "var(--background)",
         }}
       >
         {/* Top Bar */}
         <header
           style={{
-            background: "#121212",
-            borderBottom: "1px solid rgba(100, 116, 139, 0.3)",
+            background: "var(--surface)",
+            borderBottom: "1px solid var(--border)",
             padding: "0 32px",
             height: "64px",
             display: "flex",
@@ -270,19 +288,19 @@ export default function Home() {
             position: "sticky",
             top: 0,
             zIndex: 40,
-            boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+            boxShadow: "0 4px 20px var(--shadow-color)",
           }}
         >
           {/* Page Title */}
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <div>
-              <h2 style={{ fontWeight: 800, fontSize: "1rem", color: "#FFFFFF", lineHeight: 1.2 }}>
+              <h2 style={{ fontWeight: 800, fontSize: "1rem", color: "var(--foreground)", lineHeight: 1.2 }}>
                 {activeTab === "Dashboard" && "Operations Dashboard"}
                 {activeTab === "New Booking" && "New Reservation"}
                 {activeTab === "Payments" && "Payments & Billing"}
                 {activeTab === "Reports" && "Reports & Analytics"}
               </h2>
-              <p style={{ fontSize: "0.68rem", color: "#94A3B8", fontWeight: 500, marginTop: "2px" }}>
+              <p style={{ fontSize: "0.68rem", color: "var(--muted)", fontWeight: 500, marginTop: "2px" }}>
                 Manivtha Tours & Travels · QA Reviewer (ID: MNVT-OP-9944)
               </p>
             </div>
@@ -304,9 +322,9 @@ export default function Home() {
                     fontWeight: 700,
                     letterSpacing: "0.04em",
                     transition: "all 150ms ease",
-                    background: activeTab === item.id ? "#008542" : "#1E1E1E",
-                    color: activeTab === item.id ? "#fff" : "#94A3B8",
-                    border: activeTab === item.id ? "1px solid transparent" : "1px solid rgba(100, 116, 139, 0.3)",
+                    background: activeTab === item.id ? "#008542" : "var(--surface-light)",
+                    color: activeTab === item.id ? "#fff" : "var(--muted)",
+                    border: activeTab === item.id ? "1px solid transparent" : "1px solid var(--border)",
                   }}
                 >
                   {item.label}
@@ -314,10 +332,41 @@ export default function Home() {
               ))}
             </div>
 
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              style={{
+                background: "var(--surface-light)",
+                border: "1px solid var(--border)",
+                cursor: "pointer",
+                padding: "8px",
+                borderRadius: "8px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "var(--foreground)",
+                transition: "all 200ms ease",
+              }}
+              title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            >
+              {theme === "dark" ? (
+                // Sun Icon
+                <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="5" />
+                  <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                </svg>
+              ) : (
+                // Moon Icon
+                <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+              )}
+            </button>
+
             {/* Live status dot */}
             <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
               <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#008542", boxShadow: "0 0 6px #008542" }} />
-              <span style={{ fontSize: "0.68rem", fontWeight: 600, color: "#94A3B8" }}>Live</span>
+              <span style={{ fontSize: "0.68rem", fontWeight: 600, color: "var(--muted)" }}>Live</span>
             </div>
           </div>
         </header>
@@ -328,12 +377,12 @@ export default function Home() {
           {/* Welcome Banner */}
           <div
             style={{
-              background: "linear-gradient(135deg, #121212 0%, #1a1a1a 50%, #121212 100%)",
-              color: "#fff",
+              background: "linear-gradient(135deg, var(--welcome-gradient-start) 0%, var(--welcome-gradient-mid) 50%, var(--welcome-gradient-end) 100%)",
+              color: "var(--welcome-text)",
               padding: "28px 32px",
               borderRadius: "16px",
-              border: "1px solid rgba(100, 116, 139, 0.25)",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+              border: "1px solid var(--border)",
+              boxShadow: "0 8px 32px var(--shadow-color)",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -399,8 +448,8 @@ export default function Home() {
         {/* Footer */}
         <footer
           style={{
-            background: "#121212",
-            borderTop: "1px solid rgba(100, 116, 139, 0.3)",
+            background: "var(--surface)",
+            borderTop: "1px solid var(--border)",
             padding: "16px 32px",
             display: "flex",
             alignItems: "center",
@@ -409,7 +458,7 @@ export default function Home() {
             gap: "8px",
           }}
         >
-          <p style={{ fontSize: "0.72rem", color: "#94A3B8", fontWeight: 500, margin: 0 }}>
+          <p style={{ fontSize: "0.72rem", color: "var(--muted)", fontWeight: 500, margin: 0 }}>
             © 2026 Manivtha Tours & Travels · QA Reviewer (ID: MNVT-OP-9944) · Google Antigravity Clean Design System
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>

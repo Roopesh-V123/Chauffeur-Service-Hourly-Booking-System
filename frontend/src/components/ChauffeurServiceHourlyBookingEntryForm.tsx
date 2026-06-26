@@ -215,21 +215,21 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
   };
 
   return (
-    <div className="relative overflow-hidden bg-surface border border-border-color/30 rounded-2xl shadow-xl p-6 sm:p-8 max-w-full lg:max-w-6xl mx-auto transition-all duration-300 hover:shadow-2xl text-white">
+    <div className="relative overflow-hidden bg-surface border border-border-color/30 rounded-2xl shadow-xl p-6 sm:p-8 max-w-full lg:max-w-6xl mx-auto transition-all duration-300 hover:shadow-2xl text-foreground">
       {/* Visual Accent Bar */}
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent-active to-accent-pending" />
 
       {/* Header Info */}
       <div className="mb-6 pb-4 border-b border-border-color/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <div>
-          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">
             Hourly Booking Entry Form
           </h2>
           <p className="text-[11px] sm:text-xs text-muted font-bold uppercase tracking-wider mt-1">
             System Lead: Lead Operator | ID: MNVT-OP-9944
           </p>
         </div>
-        <span className="text-[10px] bg-[#1a1a1a] text-white border border-border-color/20 px-2.5 py-1 rounded font-bold uppercase">
+        <span className="text-[10px] bg-navy-light text-foreground border border-border-color/20 px-2.5 py-1 rounded font-bold uppercase">
           Client UI v2
         </span>
       </div>
@@ -251,7 +251,7 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
                 disabled={isSubmitting}
                 value={formData.live_meter_and_billing}
                 onChange={handleChange}
-                className={`w-full pl-8 pr-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white placeholder-muted transition-all text-sm font-semibold ${
+                className={`w-full pl-8 pr-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-foreground placeholder-muted transition-all text-sm font-semibold ${
                   isSubmitting ? "opacity-60 cursor-not-allowed" : ""
                 } ${
                   errors.live_meter_and_billing ? "border-rose-500 ring-2 ring-rose-950/40" : "border-border-color/30"
@@ -274,13 +274,13 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
               disabled={isSubmitting}
               value={formData.status}
               onChange={handleChange}
-              className={`w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white transition-all text-sm font-semibold cursor-pointer ${
+              className={`w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-foreground transition-all text-sm font-semibold cursor-pointer ${
                 isSubmitting ? "opacity-60 cursor-not-allowed" : ""
               }`}
             >
-              <option value="Active" className="bg-surface text-white">Active</option>
-              <option value="Completed" className="bg-surface text-white">Completed</option>
-              <option value="Cancelled" className="bg-surface text-white">Cancelled</option>
+              <option value="Active" className="bg-surface text-foreground">Active</option>
+              <option value="Completed" className="bg-surface text-foreground">Completed</option>
+              <option value="Cancelled" className="bg-surface text-foreground">Cancelled</option>
             </select>
           </div>
 
@@ -300,12 +300,12 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
                   setErrors((prev) => ({ ...prev, vehicle_id: "" }));
                 }
               }}
-              className={`w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white transition-all text-sm font-semibold cursor-pointer ${
+              className={`w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-foreground transition-all text-sm font-semibold cursor-pointer ${
                 isSubmitting ? "opacity-60 cursor-not-allowed" : ""
               }`}
             >
               {vehicles.map((v) => (
-                <option key={v.id} value={v.id} className="bg-surface text-white">
+                <option key={v.id} value={v.id} className="bg-surface text-foreground">
                   {v.category} ({v.make} {v.model} - {v.plateNumber})
                 </option>
               ))}
@@ -327,7 +327,7 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
               disabled={isSubmitting}
               value={formData.created_date}
               onChange={handleChange}
-              className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white transition-all text-sm font-semibold ${
+              className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-foreground transition-all text-sm font-semibold ${
                 isSubmitting ? "opacity-60 cursor-not-allowed" : ""
               } ${
                 errors.created_date ? "border-rose-500 ring-2 ring-rose-950/40" : "border-border-color/30"
@@ -352,7 +352,7 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
             placeholder="Provide specific notes and trip execution metrics..."
             value={formData.notes}
             onChange={handleChange}
-            className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white placeholder-muted transition-all text-sm font-semibold resize-none ${
+            className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-foreground placeholder-muted transition-all text-sm font-semibold resize-none ${
               isSubmitting ? "opacity-60 cursor-not-allowed" : ""
             } ${
               errors.notes ? "border-rose-500 ring-2 ring-rose-950/40" : "border-border-color/30"
@@ -406,7 +406,7 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
           </p>
           <ul className="space-y-1 font-semibold text-xs text-emerald-400">
             {submittedData.id && (
-              <li><strong>Record UUID:</strong> <span className="font-mono bg-[#1e1e1e] px-1.5 py-0.5 rounded text-[10px] text-white border border-border-color/30">{submittedData.id}</span></li>
+              <li><strong>Record UUID:</strong> <span className="font-mono bg-navy-light px-1.5 py-0.5 rounded text-[10px] text-foreground border border-border-color/30">{submittedData.id}</span></li>
             )}
             <li><strong>Live Meter Cost:</strong> ₹{Number(submittedData.live_meter_and_billing).toLocaleString("en-IN")}</li>
             <li><strong>Trip Status:</strong> {submittedData.status}</li>

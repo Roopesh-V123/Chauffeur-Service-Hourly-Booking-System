@@ -149,7 +149,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
 
   if (!booking) {
     return (
-      <div className="bg-surface border border-border-color/30 rounded-2xl p-12 shadow-lg text-center text-white">
+      <div className="bg-surface border border-border-color/30 rounded-2xl p-12 shadow-lg text-center text-foreground">
         <p className="text-sm font-bold text-rose-400 mb-4">
           Error: Booking record specifications could not be loaded.
         </p>
@@ -164,7 +164,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
   }
 
   return (
-    <div className="bg-surface border border-border-color/30 rounded-2xl shadow-xl p-8 max-w-full lg:max-w-5xl mx-auto transition-all duration-300 print:shadow-none print:border-none print:p-0 text-white">
+    <div className="bg-surface border border-border-color/30 rounded-2xl shadow-xl p-8 max-w-full lg:max-w-5xl mx-auto transition-all duration-300 print:shadow-none print:border-none print:p-0 text-foreground">
       
       {/* Title Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-border-color/30 pb-6 mb-8 gap-4 print:mb-6">
@@ -175,7 +175,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
           >
             ← Back to operational list
           </button>
-          <h2 className="text-2xl font-black text-white tracking-tight leading-none">
+          <h2 className="text-2xl font-black text-foreground tracking-tight leading-none">
             Detailed Booking Specification Sheet
           </h2>
           <p className="text-[10px] text-muted font-black uppercase tracking-wider mt-2">
@@ -187,7 +187,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
         <div className="flex gap-3 print:hidden">
           <button
             onClick={handlePrint}
-            className="bg-[#1e1e1e] hover:bg-[#2a2a2a] text-white border-2 border-border-color/30 font-black px-4 py-2 rounded-lg text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-1.5"
+            className="bg-[#1e1e1e] hover:bg-[#2a2a2a] text-foreground border-2 border-border-color/30 font-black px-4 py-2 rounded-lg text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-1.5"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
@@ -211,7 +211,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
         <div className="md:col-span-2 space-y-8">
           {/* Core Info */}
           <div className="bg-background border border-border-color/20 rounded-xl p-6">
-            <h3 className="text-sm font-black text-white uppercase tracking-wider border-b border-border-color/20 pb-2.5 mb-4">
+            <h3 className="text-sm font-black text-foreground uppercase tracking-wider border-b border-border-color/20 pb-2.5 mb-4">
               Core Booking Specifications
             </h3>
             
@@ -234,11 +234,11 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
               </div>
               <div>
                 <span className="text-muted block mb-1">Billed Travel Date</span>
-                <span className="text-white font-bold">{booking.createdDate}</span>
+                <span className="text-foreground font-bold">{booking.createdDate}</span>
               </div>
               <div>
                 <span className="text-muted block mb-1">System Timestamp</span>
-                <span className="text-white font-mono text-[10px]">
+                <span className="text-foreground font-mono text-[10px]">
                   {new Date(booking.createdAt).toLocaleString("en-IN")}
                 </span>
               </div>
@@ -246,7 +246,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
 
             <div className="mt-5 pt-4 border-t border-border-color/20 text-xs">
               <span className="text-muted block font-bold mb-1.5">Operational Remarks</span>
-              <p className="p-3 bg-surface border border-border-color/30 rounded-lg text-white leading-relaxed font-medium">
+              <p className="p-3 bg-surface border border-border-color/30 rounded-lg text-foreground leading-relaxed font-medium">
                 {booking.notes || "No operational notes recorded."}
               </p>
             </div>
@@ -254,7 +254,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
 
           {/* Customer Specification Section */}
           <div className="bg-background border border-border-color/20 rounded-xl p-6">
-            <h3 className="text-sm font-black text-white uppercase tracking-wider border-b border-border-color/20 pb-2.5 mb-4">
+            <h3 className="text-sm font-black text-foreground uppercase tracking-wider border-b border-border-color/20 pb-2.5 mb-4">
               Passenger customer Specifications
             </h3>
             
@@ -262,15 +262,15 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-semibold">
                 <div>
                   <span className="text-muted block mb-0.5">Name</span>
-                  <span className="text-white font-black">{booking.customer.name}</span>
+                  <span className="text-foreground font-black">{booking.customer.name}</span>
                 </div>
                 <div>
                   <span className="text-muted block mb-0.5">Email</span>
-                  <span className="text-white">{booking.customer.email}</span>
+                  <span className="text-foreground">{booking.customer.email}</span>
                 </div>
                 <div>
                   <span className="text-muted block mb-0.5">Contact</span>
-                  <span className="text-white font-mono">{booking.customer.phone}</span>
+                  <span className="text-foreground font-mono">{booking.customer.phone}</span>
                 </div>
               </div>
             ) : (
@@ -282,7 +282,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
 
           {/* Vehicle Specifications */}
           <div className="bg-background border border-border-color/20 rounded-xl p-6">
-            <h3 className="text-sm font-black text-white uppercase tracking-wider border-b border-border-color/20 pb-2.5 mb-4">
+            <h3 className="text-sm font-black text-foreground uppercase tracking-wider border-b border-border-color/20 pb-2.5 mb-4">
               Assigned Fleet Specifications
             </h3>
             
@@ -290,15 +290,15 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs font-semibold">
                 <div>
                   <span className="text-muted block mb-0.5">Vehicle Make</span>
-                  <span className="text-white font-black">{booking.vehicle.make}</span>
+                  <span className="text-foreground font-black">{booking.vehicle.make}</span>
                 </div>
                 <div>
                   <span className="text-muted block mb-0.5">Model Variant</span>
-                  <span className="text-white">{booking.vehicle.model}</span>
+                  <span className="text-foreground">{booking.vehicle.model}</span>
                 </div>
                 <div>
                   <span className="text-muted block mb-0.5">License Plate</span>
-                  <span className="text-white font-mono font-bold">{booking.vehicle.plateNumber}</span>
+                  <span className="text-foreground font-mono font-bold">{booking.vehicle.plateNumber}</span>
                 </div>
                 <div>
                   <span className="text-muted block mb-0.5">Category</span>
@@ -318,7 +318,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
           
           {/* Payments Specifications */}
           <div className="bg-background border border-border-color/20 rounded-xl p-6">
-            <h3 className="text-sm font-black text-white uppercase tracking-wider border-b border-border-color/20 pb-2.5 mb-4">
+            <h3 className="text-sm font-black text-foreground uppercase tracking-wider border-b border-border-color/20 pb-2.5 mb-4">
               Payment Receipts
             </h3>
 
@@ -343,7 +343,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
                     </div>
                     <div className="flex justify-between items-baseline">
                       <span className="text-[10px] text-muted">Reference: {p.transactionReference || "Cash"}</span>
-                      <span className="text-white font-black">₹{Number(p.amount).toLocaleString("en-IN")}</span>
+                      <span className="text-foreground font-black">₹{Number(p.amount).toLocaleString("en-IN")}</span>
                     </div>
                   </div>
                 ))}
@@ -357,7 +357,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
 
           {/* Action History Timeline */}
           <div className="bg-background border border-border-color/20 rounded-xl p-6">
-            <h3 className="text-sm font-black text-white uppercase tracking-wider border-b border-border-color/20 pb-2.5 mb-4">
+            <h3 className="text-sm font-black text-foreground uppercase tracking-wider border-b border-border-color/20 pb-2.5 mb-4">
               System Audit Logs
             </h3>
 
@@ -368,7 +368,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
                 <span className="text-muted text-[9px] block">
                   {new Date(booking.createdAt).toLocaleString("en-IN")}
                 </span>
-                <span className="text-white block mt-0.5">Booking entry created in DB</span>
+                <span className="text-foreground block mt-0.5">Booking entry created in DB</span>
               </div>
               
               {/* Event 2 */}
@@ -377,7 +377,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
                 <span className="text-muted text-[9px] block">
                   {new Date(booking.updatedAt).toLocaleString("en-IN")}
                 </span>
-                <span className="text-white block mt-0.5">System records specifications checked</span>
+                <span className="text-foreground block mt-0.5">System records specifications checked</span>
               </div>
 
               {/* Event 3 */}
@@ -386,7 +386,7 @@ export default function ChauffeurServiceHourlyBookingDetail({ bookingId, onBack 
                 <span className="text-muted text-[9px] block">
                   {booking.status === "Completed" ? "Trip closed" : booking.status === "Cancelled" ? "Trip cancelled" : "Trip actively running"}
                 </span>
-                <span className="text-white block mt-0.5">Status marker classification set to {booking.status}</span>
+                <span className="text-foreground block mt-0.5">Status marker classification set to {booking.status}</span>
               </div>
             </div>
           </div>

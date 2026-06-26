@@ -13,7 +13,7 @@ import React from "react";
 function SkeletonBlock({ className }: { className?: string }) {
   return (
     <div
-      className={`bg-gradient-to-r from-surface via-[#262626] to-surface rounded animate-pulse ${className ?? ""}`}
+      className={`bg-gradient-to-r from-surface via-navy-light to-surface rounded animate-pulse ${className ?? ""}`}
       style={{
         backgroundSize: "200% 100%",
         animation: "skeleton-shimmer 1.5s ease-in-out infinite"
@@ -287,7 +287,7 @@ export function BookingPageSkeleton() {
       <SkeletonStyles />
       <div className="min-h-screen bg-background">
         {/* Header bar */}
-        <div className="sticky top-0 z-50 border-b border-border-color/30 bg-[#121212]/80 backdrop-blur-md px-6 h-16 flex items-center justify-between">
+        <div className="sticky top-0 z-50 border-b border-border-color/30 bg-surface/80 backdrop-blur-md px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <SkeletonBlock className="h-3 w-24" />
             <SkeletonBlock className="h-3 w-3 rounded-full" />
@@ -384,12 +384,12 @@ export function EmptyStateMessage({
   };
 
   return (
-    <div className="bg-surface border border-border-color/30 rounded-xl p-8 sm:p-12 text-center max-w-md mx-auto my-6 flex flex-col items-center justify-center space-y-4 shadow-sm transition-all hover:shadow text-white">
+    <div className="bg-surface border border-border-color/30 rounded-xl p-8 sm:p-12 text-center max-w-md mx-auto my-6 flex flex-col items-center justify-center space-y-4 shadow-sm transition-all hover:shadow text-foreground">
       <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center border border-border-color/20">
         {renderIcon()}
       </div>
       <div>
-        <h4 className="text-sm sm:text-base font-black text-white uppercase tracking-tight">
+        <h4 className="text-sm sm:text-base font-black text-foreground uppercase tracking-tight">
           {title}
         </h4>
         <p className="text-xs text-muted font-semibold mt-1 max-w-[280px] sm:max-w-xs mx-auto leading-relaxed">

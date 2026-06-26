@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
-/* ── New Dark Theme CSS Custom Properties ─────────────────────────── */
+/* ── Theme Definitions (CSS Custom Properties) ─────────────────────── */
 :root {
+  /* Default: Dark Theme */
   --background: #000000;
   --foreground: #FFFFFF;
   --surface:    #121212;
@@ -9,28 +10,78 @@
   --muted:      #94A3B8;
   --accent-active:  #008542;
   --accent-pending: #D97706;
+  
+  --surface-light: #1E1E1E;
+  
+  --sidebar-gradient-start: #121212;
+  --sidebar-gradient-end: #000000;
+  --sidebar-border: rgba(100, 116, 139, 0.2);
+  --sidebar-label: rgba(255, 255, 255, 0.3);
+  --sidebar-nav-inactive-fg: rgba(255, 255, 255, 0.55);
+  
+  --welcome-gradient-start: #121212;
+  --welcome-gradient-mid: #1a1a1a;
+  --welcome-gradient-end: #121212;
+  --welcome-text: #FFFFFF;
+  
+  --btn-secondary-bg: #121212;
+  --btn-secondary-hover-bg: #1E1E1E;
+  
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --card-bg-fallback: #1a1a1a;
+}
+
+:root[data-theme="light"], .light {
+  /* Light Theme */
+  --background: #FFFFFF;
+  --foreground: #0F172A; /* slate-900 */
+  --surface:    #F8FAFC; /* slate-50 */
+  --border:     #CBD5E1; /* slate-300 */
+  --muted:      #64748B; /* slate-500 */
+  --accent-active:  #008542;
+  --accent-pending: #D97706;
+  
+  --surface-light: #E2E8F0; /* slate-200 */
+  
+  --sidebar-gradient-start: #F1F5F9; /* slate-100 */
+  --sidebar-gradient-end: #E2E8F0; /* slate-200 */
+  --sidebar-border: rgba(100, 116, 139, 0.15);
+  --sidebar-label: rgba(15, 23, 42, 0.4);
+  --sidebar-nav-inactive-fg: rgba(15, 23, 42, 0.6);
+  
+  --welcome-gradient-start: #F1F5F9;
+  --welcome-gradient-mid: #F8FAFC;
+  --welcome-gradient-end: #F1F5F9;
+  --welcome-text: #0F172A;
+  
+  --btn-secondary-bg: #F8FAFC;
+  --btn-secondary-hover-bg: #E2E8F0;
+  
+  --shadow-color: rgba(15, 23, 42, 0.05);
+  --card-bg-fallback: #F1F5F9;
 }
 
 @theme {
-  /* New dark palette tokens */
-  --color-background:     #000000;
-  --color-surface:        #121212;
-  --color-border-color:   #64748B;
-  --color-muted:          #94A3B8;
-  --color-accent-active:  #008542;
-  --color-accent-pending: #D97706;
+  /* Theme tokens pointing to CSS variables for dynamic switching */
+  --color-background:     var(--background);
+  --color-foreground:     var(--foreground);
+  --color-surface:        var(--surface);
+  --color-border-color:   var(--border);
+  --color-muted:          var(--muted);
+  --color-accent-active:  var(--accent-active);
+  --color-accent-pending: var(--accent-pending);
 
-  /* Legacy token aliases — point to dark equivalents so old class names still work */
-  --color-navy-dark:        #000000;
-  --color-navy-medium:      #121212;
-  --color-navy-light:       #1E1E1E;
-  --color-navy-slate:       #94A3B8;
-  --color-crisp-white:      #FFFFFF;
-  --color-crisp-offwhite:   #121212;
-  --color-crisp-lightgray:  #64748B;
-  --color-accent-cyan:      #008542;
-  --color-accent-blue:      #008542;
-  --color-accent-gold:      #D97706;
+  /* Legacy aliases mapping to variables */
+  --color-navy-dark:        var(--background);
+  --color-navy-medium:      var(--surface);
+  --color-navy-light:       var(--surface-light);
+  --color-navy-slate:       var(--muted);
+  --color-crisp-white:      var(--foreground);
+  --color-crisp-offwhite:   var(--surface);
+  --color-crisp-lightgray:  var(--border);
+  --color-accent-cyan:      var(--accent-active);
+  --color-accent-blue:      var(--accent-active);
+  --color-accent-gold:      var(--accent-pending);
 
   --font-sans: "Inter", var(--font-geist-sans), sans-serif;
 }
@@ -70,14 +121,14 @@ body {
   }
 
   .btn-secondary {
-    background-color: #121212;
-    color: #FFFFFF;
-    border: 2px solid #64748B;
+    background-color: var(--btn-secondary-bg);
+    color: var(--foreground);
+    border: 2px solid var(--border);
   }
 
   .btn-secondary:hover {
-    background-color: #1E1E1E;
-    border-color: #94A3B8;
+    background-color: var(--btn-secondary-hover-bg);
+    border-color: var(--muted);
   }
 }
 

@@ -9,28 +9,28 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // ── New Dark Theme Palette ──────────────────────────────────
-        background: "#000000",      // Pure black — deep page background
-        surface: "#121212",         // Primary surface — Bento Grid / cards
-        "border-color": "#64748B",  // Neutral — subtle dividers & borders
-        muted: "#94A3B8",           // Light neutral — secondary / label text
+        // ── Dynamic Color Palette (maps to CSS variables) ──
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        surface: "var(--surface)",
+        "border-color": "var(--border)",
+        muted: "var(--muted)",
         accent: {
-          active:  "#008542",       // Secondary green — live meters / active rides
-          pending: "#D97706",       // Tertiary amber — alerts / pending statuses
+          active:  "var(--accent-active)",
+          pending: "var(--accent-pending)",
         },
 
-        // ── Legacy aliases kept so any remaining token refs resolve ──
-        // (will be overridden in components but kept for safety)
+        // ── Legacy aliases kept for safety ──
         navy: {
-          dark:   "#000000",
-          medium: "#121212",
-          light:  "#1E1E1E",
-          slate:  "#94A3B8",
+          dark:   "var(--background)",
+          medium: "var(--surface)",
+          light:  "var(--surface-light)",
+          slate:  "var(--muted)",
         },
         crisp: {
-          white:     "#FFFFFF",
-          offwhite:  "#121212",
-          lightgray: "#64748B",
+          white:     "var(--foreground)",
+          offwhite:  "var(--surface)",
+          lightgray: "var(--border)",
         },
       },
       fontFamily: {
