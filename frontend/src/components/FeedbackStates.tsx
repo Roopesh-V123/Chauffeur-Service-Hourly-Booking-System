@@ -13,7 +13,7 @@ import React from "react";
 function SkeletonBlock({ className }: { className?: string }) {
   return (
     <div
-      className={`bg-gradient-to-r from-crisp-lightgray via-crisp-offwhite to-crisp-lightgray rounded animate-pulse ${className ?? ""}`}
+      className={`bg-gradient-to-r from-surface via-[#262626] to-surface rounded animate-pulse ${className ?? ""}`}
       style={{
         backgroundSize: "200% 100%",
         animation: "skeleton-shimmer 1.5s ease-in-out infinite"
@@ -42,10 +42,10 @@ export function TableRowSkeleton() {
   return (
     <>
       <SkeletonStyles />
-      <div className="overflow-x-auto rounded-xl border border-crisp-lightgray shadow-sm">
+      <div className="overflow-x-auto rounded-xl border border-border-color/30 shadow-md">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-navy-dark/5 border-b border-crisp-lightgray text-navy-slate text-[11px] font-bold uppercase tracking-wider">
+            <tr className="bg-surface border-b border-border-color/30 text-muted text-[11px] font-bold uppercase tracking-wider">
               <th className="py-4 px-5">Billing Meter (₹)</th>
               <th className="py-4 px-5">Pickup Date</th>
               <th className="py-4 px-5">Chauffeur Notes</th>
@@ -53,7 +53,7 @@ export function TableRowSkeleton() {
               <th className="py-4 px-5 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-crisp-lightgray bg-white">
+          <tbody className="divide-y divide-border-color/20 bg-background">
             {Array.from({ length: 5 }).map((_, i) => (
               <tr key={i}>
                 <td className="py-4 px-5">
@@ -95,7 +95,7 @@ export function KpiCardsSkeleton() {
         {Array.from({ length: 3 }).map((_, i) => (
           <div
             key={i}
-            className="bg-crisp-white/85 backdrop-blur-md border border-crisp-lightgray rounded-xl p-6 shadow-md flex items-center justify-between"
+            className="bg-surface/85 backdrop-blur-md border border-border-color/30 rounded-xl p-6 shadow-md flex items-center justify-between"
           >
             <div className="flex flex-col gap-3 w-full">
               <SkeletonBlock className="h-2.5 w-28" />
@@ -118,9 +118,9 @@ export function BookingDetailSkeleton() {
   return (
     <>
       <SkeletonStyles />
-      <div className="bg-crisp-white border border-crisp-lightgray rounded-2xl p-8 max-w-full lg:max-w-5xl mx-auto">
+      <div className="bg-surface border border-border-color/30 rounded-2xl p-8 max-w-full lg:max-w-5xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-start border-b border-crisp-lightgray pb-6 mb-8 gap-4">
+        <div className="flex justify-between items-start border-b border-border-color/30 pb-6 mb-8 gap-4">
           <div className="flex flex-col gap-3">
             <SkeletonBlock className="h-3 w-36" />
             <SkeletonBlock className="h-6 w-72" />
@@ -133,7 +133,7 @@ export function BookingDetailSkeleton() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-8">
             {/* Core section */}
-            <div className="bg-crisp-offwhite border border-crisp-lightgray rounded-xl p-6">
+            <div className="bg-background border border-border-color/20 rounded-xl p-6">
               <SkeletonBlock className="h-3 w-48 mb-4" />
               <div className="grid grid-cols-2 gap-y-4 gap-x-6">
                 {Array.from({ length: 4 }).map((_, i) => (
@@ -143,14 +143,14 @@ export function BookingDetailSkeleton() {
                   </div>
                 ))}
               </div>
-              <div className="mt-5 pt-4 border-t border-crisp-lightgray/50">
+              <div className="mt-5 pt-4 border-t border-border-color/20">
                 <SkeletonBlock className="h-2.5 w-24 mb-2" />
                 <SkeletonBlock className="h-12 w-full rounded-lg" />
               </div>
             </div>
 
             {/* Customer section */}
-            <div className="bg-crisp-offwhite border border-crisp-lightgray rounded-xl p-6">
+            <div className="bg-background border border-border-color/20 rounded-xl p-6">
               <SkeletonBlock className="h-3 w-40 mb-4" />
               <div className="grid grid-cols-3 gap-4">
                 {Array.from({ length: 3 }).map((_, i) => (
@@ -165,10 +165,10 @@ export function BookingDetailSkeleton() {
 
           {/* Right column */}
           <div className="space-y-8">
-            <div className="bg-crisp-offwhite border border-crisp-lightgray rounded-xl p-6">
+            <div className="bg-background border border-border-color/20 rounded-xl p-6">
               <SkeletonBlock className="h-3 w-32 mb-4" />
               {Array.from({ length: 2 }).map((_, i) => (
-                <div key={i} className="bg-crisp-white border border-crisp-lightgray rounded-lg p-3 mb-3">
+                <div key={i} className="bg-surface border border-border-color/20 rounded-lg p-3 mb-3">
                   <div className="flex justify-between mb-2">
                     <SkeletonBlock className="h-2.5 w-16" />
                     <SkeletonBlock className="h-4 w-12 rounded" />
@@ -203,7 +203,7 @@ export function PaymentTrackerSkeleton() {
         </div>
 
         {/* Billing breakdown placeholder */}
-        <div className="bg-crisp-offwhite rounded-lg p-5 border border-crisp-lightgray space-y-4">
+        <div className="bg-surface rounded-lg p-5 border border-border-color/30 space-y-4">
           <SkeletonBlock className="h-2.5 w-28" />
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="flex justify-between">
@@ -236,7 +236,7 @@ export function ReportsSkeleton() {
         {/* KPI stats row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="bg-crisp-offwhite border border-crisp-lightgray rounded-lg p-5 flex flex-col gap-3">
+            <div key={i} className="bg-surface border border-border-color/30 rounded-lg p-5 flex flex-col gap-3">
               <SkeletonBlock className="h-2.5 w-24" />
               <SkeletonBlock className="h-7 w-20" />
             </div>
@@ -246,7 +246,7 @@ export function ReportsSkeleton() {
         {/* Charts row */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Bar chart skeleton */}
-          <div className="border border-crisp-lightgray rounded-lg p-6 bg-crisp-offwhite">
+          <div className="border border-border-color/30 rounded-lg p-6 bg-surface">
             <SkeletonBlock className="h-3 w-40 mb-6" />
             <div className="flex items-end gap-6 h-40 px-4">
               {Array.from({ length: 3 }).map((_, i) => (
@@ -259,7 +259,7 @@ export function ReportsSkeleton() {
           </div>
 
           {/* Line chart skeleton */}
-          <div className="lg:col-span-2 border border-crisp-lightgray rounded-lg p-6 bg-crisp-offwhite">
+          <div className="lg:col-span-2 border border-border-color/30 rounded-lg p-6 bg-surface">
             <SkeletonBlock className="h-3 w-56 mb-6" />
             <div className="relative h-40">
               <SkeletonBlock className="h-full w-full rounded" />
@@ -285,9 +285,9 @@ export function BookingPageSkeleton() {
   return (
     <>
       <SkeletonStyles />
-      <div className="min-h-screen bg-crisp-offwhite">
+      <div className="min-h-screen bg-background">
         {/* Header bar */}
-        <div className="sticky top-0 z-50 border-b border-crisp-lightgray bg-white/80 backdrop-blur-md px-6 h-16 flex items-center justify-between">
+        <div className="sticky top-0 z-50 border-b border-border-color/30 bg-[#121212]/80 backdrop-blur-md px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <SkeletonBlock className="h-3 w-24" />
             <SkeletonBlock className="h-3 w-3 rounded-full" />
@@ -310,7 +310,7 @@ export function BookingPageSkeleton() {
           {/* Metric cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="rounded-2xl p-5 border border-crisp-lightgray bg-white shadow-md flex flex-col gap-3">
+              <div key={i} className="rounded-2xl p-5 border border-border-color/30 bg-surface shadow-md flex flex-col gap-3">
                 <SkeletonBlock className="h-2.5 w-16" />
                 <SkeletonBlock className="h-7 w-24" />
                 <SkeletonBlock className="h-2 w-20" />
@@ -321,7 +321,7 @@ export function BookingPageSkeleton() {
           {/* 2-col detail grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="rounded-2xl p-6 border border-crisp-lightgray bg-white shadow-md">
+              <div key={i} className="rounded-2xl p-6 border border-border-color/30 bg-surface shadow-md">
                 <SkeletonBlock className="h-3 w-32 mb-4" />
                 <div className="grid grid-cols-2 gap-4">
                   {Array.from({ length: 4 }).map((_, j) => (
@@ -363,7 +363,7 @@ export function EmptyStateMessage({
     switch (iconType) {
       case "search":
         return (
-          <svg className="w-8 h-8 sm:w-10 sm:h-10 text-navy-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-8 h-8 sm:w-10 sm:h-10 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         );
@@ -376,7 +376,7 @@ export function EmptyStateMessage({
       case "database":
       default:
         return (
-          <svg className="w-8 h-8 sm:w-10 sm:h-10 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-8 h-8 sm:w-10 sm:h-10 text-accent-active" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
           </svg>
         );
@@ -384,22 +384,22 @@ export function EmptyStateMessage({
   };
 
   return (
-    <div className="bg-crisp-white border border-crisp-lightgray rounded-xl p-8 sm:p-12 text-center max-w-md mx-auto my-6 flex flex-col items-center justify-center space-y-4 shadow-sm transition-all hover:shadow">
-      <div className="w-16 h-16 rounded-full bg-crisp-offwhite flex items-center justify-center border border-crisp-lightgray/60">
+    <div className="bg-surface border border-border-color/30 rounded-xl p-8 sm:p-12 text-center max-w-md mx-auto my-6 flex flex-col items-center justify-center space-y-4 shadow-sm transition-all hover:shadow text-white">
+      <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center border border-border-color/20">
         {renderIcon()}
       </div>
       <div>
-        <h4 className="text-sm sm:text-base font-black text-navy-dark uppercase tracking-tight">
+        <h4 className="text-sm sm:text-base font-black text-white uppercase tracking-tight">
           {title}
         </h4>
-        <p className="text-xs text-navy-slate font-semibold mt-1 max-w-[280px] sm:max-w-xs mx-auto leading-relaxed">
+        <p className="text-xs text-muted font-semibold mt-1 max-w-[280px] sm:max-w-xs mx-auto leading-relaxed">
           {description}
         </p>
       </div>
       {actionText && onAction && (
         <button
           onClick={onAction}
-          className="mt-2 w-full sm:w-auto px-5 py-2.5 bg-navy-dark hover:bg-accent-blue text-crisp-white rounded-lg text-xs font-extrabold uppercase tracking-wider transition-all duration-200 active:scale-[0.98] cursor-pointer"
+          className="mt-2 w-full sm:w-auto px-5 py-2.5 bg-accent-active hover:bg-accent-active/85 text-white rounded-lg text-xs font-extrabold uppercase tracking-wider transition-all duration-200 active:scale-[0.98] cursor-pointer"
         >
           {actionText}
         </button>

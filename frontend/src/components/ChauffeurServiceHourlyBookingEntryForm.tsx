@@ -215,21 +215,21 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
   };
 
   return (
-    <div className="relative overflow-hidden bg-crisp-white border border-crisp-lightgray rounded-2xl shadow-xl p-6 sm:p-8 max-w-full lg:max-w-6xl mx-auto transition-all duration-300 hover:shadow-2xl">
+    <div className="relative overflow-hidden bg-surface border border-border-color/30 rounded-2xl shadow-xl p-6 sm:p-8 max-w-full lg:max-w-6xl mx-auto transition-all duration-300 hover:shadow-2xl text-white">
       {/* Visual Accent Bar */}
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-navy-medium to-accent-blue" />
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent-active to-accent-pending" />
 
       {/* Header Info */}
-      <div className="mb-6 pb-4 border-b border-crisp-lightgray flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+      <div className="mb-6 pb-4 border-b border-border-color/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <div>
-          <h2 className="text-xl sm:text-2xl font-black text-navy-dark tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
             Hourly Booking Entry Form
           </h2>
-          <p className="text-[11px] sm:text-xs text-navy-slate font-bold uppercase tracking-wider mt-1">
+          <p className="text-[11px] sm:text-xs text-muted font-bold uppercase tracking-wider mt-1">
             System Lead: Lead Operator | ID: MNVT-OP-9944
           </p>
         </div>
-        <span className="text-[10px] bg-navy-medium/10 text-navy-dark border border-navy-medium/25 px-2.5 py-1 rounded font-bold uppercase">
+        <span className="text-[10px] bg-[#1a1a1a] text-white border border-border-color/20 px-2.5 py-1 rounded font-bold uppercase">
           Client UI v2
         </span>
       </div>
@@ -238,11 +238,11 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Live Meter and Billing */}
           <div className="flex flex-col">
-            <label className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2" htmlFor="live_meter_and_billing">
+            <label className="block text-xs font-bold text-muted uppercase tracking-wider mb-2" htmlFor="live_meter_and_billing">
               Live Meter and Billing (₹) <span className="text-rose-500">*</span>
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-navy-slate font-extrabold text-sm">₹</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted font-extrabold text-sm">₹</span>
               <input
                 id="live_meter_and_billing"
                 name="live_meter_and_billing"
@@ -251,21 +251,21 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
                 disabled={isSubmitting}
                 value={formData.live_meter_and_billing}
                 onChange={handleChange}
-                className={`w-full pl-8 pr-4 py-3 bg-crisp-offwhite/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue focus:border-transparent text-navy-dark placeholder-navy-slate transition-all text-sm font-semibold ${
+                className={`w-full pl-8 pr-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white placeholder-muted transition-all text-sm font-semibold ${
                   isSubmitting ? "opacity-60 cursor-not-allowed" : ""
                 } ${
-                  errors.live_meter_and_billing ? "border-rose-400 ring-2 ring-rose-100" : "border-crisp-lightgray"
+                  errors.live_meter_and_billing ? "border-rose-500 ring-2 ring-rose-950/40" : "border-border-color/30"
                 }`}
               />
             </div>
             {errors.live_meter_and_billing && (
-              <p className="text-rose-600 text-[11px] font-bold mt-1.5">{errors.live_meter_and_billing}</p>
+              <p className="text-rose-400 text-[11px] font-bold mt-1.5">{errors.live_meter_and_billing}</p>
             )}
           </div>
 
           {/* Booking Status Dropdown */}
           <div className="flex flex-col">
-            <label className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2" htmlFor="status">
+            <label className="block text-xs font-bold text-muted uppercase tracking-wider mb-2" htmlFor="status">
               Booking Status
             </label>
             <select
@@ -274,19 +274,19 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
               disabled={isSubmitting}
               value={formData.status}
               onChange={handleChange}
-              className={`w-full px-4 py-3 bg-crisp-offwhite/50 border border-crisp-lightgray rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue focus:border-transparent text-navy-dark transition-all text-sm font-semibold cursor-pointer ${
+              className={`w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white transition-all text-sm font-semibold cursor-pointer ${
                 isSubmitting ? "opacity-60 cursor-not-allowed" : ""
               }`}
             >
-              <option value="Active">Active</option>
-              <option value="Completed">Completed</option>
-              <option value="Cancelled">Cancelled</option>
+              <option value="Active" className="bg-surface text-white">Active</option>
+              <option value="Completed" className="bg-surface text-white">Completed</option>
+              <option value="Cancelled" className="bg-surface text-white">Cancelled</option>
             </select>
           </div>
 
           {/* Car / Vehicle Type Dropdown */}
           <div className="flex flex-col">
-            <label className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2" htmlFor="vehicle_id">
+            <label className="block text-xs font-bold text-muted uppercase tracking-wider mb-2" htmlFor="vehicle_id">
               Car / Vehicle Type <span className="text-rose-500">*</span>
             </label>
             <select
@@ -300,24 +300,24 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
                   setErrors((prev) => ({ ...prev, vehicle_id: "" }));
                 }
               }}
-              className={`w-full px-4 py-3 bg-crisp-offwhite/50 border border-crisp-lightgray rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue focus:border-transparent text-navy-dark transition-all text-sm font-semibold cursor-pointer ${
+              className={`w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white transition-all text-sm font-semibold cursor-pointer ${
                 isSubmitting ? "opacity-60 cursor-not-allowed" : ""
               }`}
             >
               {vehicles.map((v) => (
-                <option key={v.id} value={v.id}>
+                <option key={v.id} value={v.id} className="bg-surface text-white">
                   {v.category} ({v.make} {v.model} - {v.plateNumber})
                 </option>
               ))}
             </select>
             {errors.vehicle_id && (
-              <p className="text-rose-600 text-[11px] font-bold mt-1.5">{errors.vehicle_id}</p>
+              <p className="text-rose-400 text-[11px] font-bold mt-1.5">{errors.vehicle_id}</p>
             )}
           </div>
 
           {/* Created Date Picker */}
           <div className="flex flex-col">
-            <label className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2" htmlFor="created_date">
+            <label className="block text-xs font-bold text-muted uppercase tracking-wider mb-2" htmlFor="created_date">
               Created Date <span className="text-rose-500">*</span>
             </label>
             <input
@@ -327,21 +327,21 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
               disabled={isSubmitting}
               value={formData.created_date}
               onChange={handleChange}
-              className={`w-full px-4 py-3 bg-crisp-offwhite/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue focus:border-transparent text-navy-dark transition-all text-sm font-semibold ${
+              className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white transition-all text-sm font-semibold ${
                 isSubmitting ? "opacity-60 cursor-not-allowed" : ""
               } ${
-                errors.created_date ? "border-rose-400 ring-2 ring-rose-100" : "border-crisp-lightgray"
+                errors.created_date ? "border-rose-500 ring-2 ring-rose-950/40" : "border-border-color/30"
               }`}
             />
             {errors.created_date && (
-              <p className="text-rose-600 text-[11px] font-bold mt-1.5">{errors.created_date}</p>
+              <p className="text-rose-400 text-[11px] font-bold mt-1.5">{errors.created_date}</p>
             )}
           </div>
         </div>
 
         {/* Notes Textarea */}
         <div className="flex flex-col">
-          <label className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2" htmlFor="notes">
+          <label className="block text-xs font-bold text-muted uppercase tracking-wider mb-2" htmlFor="notes">
             Notes <span className="text-rose-500">*</span>
           </label>
           <textarea
@@ -352,24 +352,24 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
             placeholder="Provide specific notes and trip execution metrics..."
             value={formData.notes}
             onChange={handleChange}
-            className={`w-full px-4 py-3 bg-crisp-offwhite/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue focus:border-transparent text-navy-dark placeholder-navy-slate transition-all text-sm font-semibold resize-none ${
+            className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white placeholder-muted transition-all text-sm font-semibold resize-none ${
               isSubmitting ? "opacity-60 cursor-not-allowed" : ""
             } ${
-              errors.notes ? "border-rose-400 ring-2 ring-rose-100" : "border-crisp-lightgray"
+              errors.notes ? "border-rose-500 ring-2 ring-rose-950/40" : "border-border-color/30"
             }`}
           />
           {errors.notes && (
-            <p className="text-rose-600 text-[11px] font-bold mt-1.5">{errors.notes}</p>
+            <p className="text-rose-400 text-[11px] font-bold mt-1.5">{errors.notes}</p>
           )}
         </div>
 
         {/* API Error Alert */}
         {apiError && (
-          <div className="p-4 bg-rose-50 border border-rose-200 text-rose-800 rounded-lg text-xs font-semibold flex items-start gap-2.5 animate-fadeIn">
+          <div className="p-4 bg-rose-950/20 border border-rose-900/40 text-rose-300 rounded-lg text-xs font-semibold flex items-start gap-2.5 animate-fadeIn">
             <span className="text-sm">⚠️</span>
             <div className="flex-1">
-              <p className="font-extrabold text-rose-900">Database Save Failed</p>
-              <p className="mt-0.5 text-rose-700">{apiError}</p>
+              <p className="font-extrabold text-rose-200">Database Save Failed</p>
+              <p className="mt-0.5 text-rose-400">{apiError}</p>
             </div>
           </div>
         )}
@@ -378,10 +378,10 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`w-full py-4 font-bold rounded-lg shadow-md transition-all duration-200 transform active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-accent-cyan border border-transparent text-sm tracking-wide flex items-center justify-center gap-2 ${
+          className={`w-full py-4 font-bold rounded-lg shadow-md transition-all duration-200 transform active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-accent-active border border-transparent text-sm tracking-wide flex items-center justify-center gap-2 ${
             isSubmitting
-              ? "bg-navy-medium/60 text-crisp-white/80 cursor-not-allowed"
-              : "bg-navy-medium hover:bg-navy-dark text-crisp-white cursor-pointer"
+              ? "bg-accent-active/60 text-white/80 cursor-not-allowed"
+              : "bg-accent-active hover:bg-accent-active/85 text-white cursor-pointer"
           }`}
         >
           {isSubmitting ? (
@@ -400,13 +400,13 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
 
       {/* Database Submission Success Detail View */}
       {submittedData && apiSuccess && (
-        <div className="mt-6 p-5 bg-emerald-50 border border-emerald-200 rounded-lg text-sm text-emerald-900 transition-all duration-300 animate-fadeIn">
-          <p className="font-extrabold flex items-center mb-2 text-emerald-800">
+        <div className="mt-6 p-5 bg-emerald-950/20 border border-emerald-800/30 rounded-lg text-sm text-emerald-300 transition-all duration-300 animate-fadeIn">
+          <p className="font-extrabold flex items-center mb-2 text-emerald-200">
             <span className="mr-2">✓</span> Booking Saved to Database Successfully (Operator: Lead Operator, ID: MNVT-OP-9944)
           </p>
-          <ul className="space-y-1 font-semibold text-xs text-emerald-800">
+          <ul className="space-y-1 font-semibold text-xs text-emerald-400">
             {submittedData.id && (
-              <li><strong>Record UUID:</strong> <span className="font-mono bg-emerald-100/60 px-1.5 py-0.5 rounded text-[10px] text-emerald-900 border border-emerald-200">{submittedData.id}</span></li>
+              <li><strong>Record UUID:</strong> <span className="font-mono bg-[#1e1e1e] px-1.5 py-0.5 rounded text-[10px] text-white border border-border-color/30">{submittedData.id}</span></li>
             )}
             <li><strong>Live Meter Cost:</strong> ₹{Number(submittedData.live_meter_and_billing).toLocaleString("en-IN")}</li>
             <li><strong>Trip Status:</strong> {submittedData.status}</li>

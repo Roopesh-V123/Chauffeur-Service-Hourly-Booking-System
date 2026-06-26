@@ -388,23 +388,23 @@ export default function ReportsAnalyticsDashboard() {
      * @author QA Reviewer (ID: MNVT-OP-9944)
      */
     const statuses = [
-      { label: "Completed", count: Completed, color: "fill-accent-blue" },
-      { label: "Active", count: Active, color: "fill-accent-cyan" },
-      { label: "Cancelled", count: Cancelled, color: "fill-navy-light" }
+      { label: "Completed", count: Completed, color: "fill-accent-active" },
+      { label: "Active", count: Active, color: "fill-[#00b057]" },
+      { label: "Cancelled", count: Cancelled, color: "fill-accent-pending" }
     ];
 
     return (
       <svg className="w-full h-64 font-sans" viewBox="0 0 400 240">
         {/* Horizontal grid lines */}
-        <line x1="50" y1="40" x2="360" y2="40" className="stroke-crisp-lightgray" strokeDasharray="3" />
-        <line x1="50" y1="90" x2="360" y2="90" className="stroke-crisp-lightgray" strokeDasharray="3" />
-        <line x1="50" y1="140" x2="360" y2="140" className="stroke-crisp-lightgray" strokeDasharray="3" />
-        <line x1="50" y1="190" x2="360" y2="190" className="stroke-crisp-lightgray" />
+        <line x1="50" y1="40" x2="360" y2="40" className="stroke-border-color/20" strokeDasharray="3" />
+        <line x1="50" y1="90" x2="360" y2="90" className="stroke-border-color/20" strokeDasharray="3" />
+        <line x1="50" y1="140" x2="360" y2="140" className="stroke-border-color/20" strokeDasharray="3" />
+        <line x1="50" y1="190" x2="360" y2="190" className="stroke-border-color/20" />
 
         {/* Y-axis Labels */}
-        <text x="35" y="44" className="text-[10px] fill-navy-slate font-bold text-right" textAnchor="end">{maxVal}</text>
-        <text x="35" y="119" className="text-[10px] fill-navy-slate font-bold text-right" textAnchor="end">{Math.round(maxVal / 2)}</text>
-        <text x="35" y="194" className="text-[10px] fill-navy-slate font-bold text-right" textAnchor="end">0</text>
+        <text x="35" y="44" className="text-[10px] fill-muted font-bold text-right" textAnchor="end">{maxVal}</text>
+        <text x="35" y="119" className="text-[10px] fill-muted font-bold text-right" textAnchor="end">{Math.round(maxVal / 2)}</text>
+        <text x="35" y="194" className="text-[10px] fill-muted font-bold text-right" textAnchor="end">0</text>
 
         {/* Bars */}
         {statuses.map((s, idx) => {
@@ -421,7 +421,7 @@ export default function ReportsAnalyticsDashboard() {
                 y="30"
                 width={barWidth + 20}
                 height="170"
-                className="fill-transparent group-hover:fill-crisp-lightgray/20 transition-all duration-300 rounded"
+                className="fill-transparent group-hover:fill-border-color/10 transition-all duration-300 rounded"
               />
               {/* Actual data bar */}
               <rect
@@ -437,7 +437,7 @@ export default function ReportsAnalyticsDashboard() {
                 x={x + barWidth / 2}
                 y={y - 8}
                 textAnchor="middle"
-                className="text-xs font-black fill-navy-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="text-xs font-black fill-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               >
                 {s.count}
               </text>
@@ -446,7 +446,7 @@ export default function ReportsAnalyticsDashboard() {
                 x={x + barWidth / 2}
                 y="212"
                 textAnchor="middle"
-                className="text-[11px] fill-navy-slate font-black uppercase tracking-wider"
+                className="text-[11px] fill-muted font-black uppercase tracking-wider"
               >
                 {s.label}
               </text>
@@ -460,7 +460,7 @@ export default function ReportsAnalyticsDashboard() {
   const renderTrendChart = () => {
     if (!data || data.time_series.length === 0) {
       return (
-        <div className="h-64 flex items-center justify-center text-navy-slate font-bold">
+        <div className="h-64 flex items-center justify-center text-muted font-bold">
           No time series records to display.
         </div>
       );
@@ -503,24 +503,24 @@ export default function ReportsAnalyticsDashboard() {
         <svg className="w-full h-64 font-sans" viewBox={`0 0 ${svgWidth} ${svgHeight}`}>
           <defs>
             <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#0077B6" stopOpacity="0.25" />
-              <stop offset="100%" stopColor="#0077B6" stopOpacity="0.0" />
+              <stop offset="0%" stopColor="#008542" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#008542" stopOpacity="0.0" />
             </linearGradient>
           </defs>
 
           {/* Grid lines */}
-          <line x1={paddingLeft} y1={paddingTop} x2={svgWidth - paddingRight} y2={paddingTop} className="stroke-crisp-lightgray" strokeDasharray="3" />
-          <line x1={paddingLeft} y1={paddingTop + chartHeight / 2} x2={svgWidth - paddingRight} y2={paddingTop + chartHeight / 2} className="stroke-crisp-lightgray" strokeDasharray="3" />
-          <line x1={paddingLeft} y1={svgHeight - paddingBottom} x2={svgWidth - paddingRight} y2={svgHeight - paddingBottom} className="stroke-crisp-lightgray" />
+          <line x1={paddingLeft} y1={paddingTop} x2={svgWidth - paddingRight} y2={paddingTop} className="stroke-border-color/20" strokeDasharray="3" />
+          <line x1={paddingLeft} y1={paddingTop + chartHeight / 2} x2={svgWidth - paddingRight} y2={paddingTop + chartHeight / 2} className="stroke-border-color/20" strokeDasharray="3" />
+          <line x1={paddingLeft} y1={svgHeight - paddingBottom} x2={svgWidth - paddingRight} y2={svgHeight - paddingBottom} className="stroke-border-color/20" />
 
           {/* Y-Axis Labels */}
-          <text x={paddingLeft - 10} y={paddingTop + 4} textAnchor="end" className="text-[10px] fill-navy-slate font-bold">
+          <text x={paddingLeft - 10} y={paddingTop + 4} textAnchor="end" className="text-[10px] fill-muted font-bold">
             ₹{Math.round(maxRev).toLocaleString("en-IN")}
           </text>
-          <text x={paddingLeft - 10} y={paddingTop + chartHeight / 2 + 4} textAnchor="end" className="text-[10px] fill-navy-slate font-bold">
+          <text x={paddingLeft - 10} y={paddingTop + chartHeight / 2 + 4} textAnchor="end" className="text-[10px] fill-muted font-bold">
             ₹{Math.round(maxRev / 2).toLocaleString("en-IN")}
           </text>
-          <text x={paddingLeft - 10} y={svgHeight - paddingBottom + 4} textAnchor="end" className="text-[10px] fill-navy-slate font-bold">
+          <text x={paddingLeft - 10} y={svgHeight - paddingBottom + 4} textAnchor="end" className="text-[10px] fill-muted font-bold">
             ₹0
           </text>
 
@@ -532,7 +532,7 @@ export default function ReportsAnalyticsDashboard() {
             <path
               d={linePath}
               fill="none"
-              stroke="#0077B6"
+              stroke="#008542"
               strokeWidth="3"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -551,7 +551,7 @@ export default function ReportsAnalyticsDashboard() {
                     x={c.x}
                     y={svgHeight - 15}
                     textAnchor="middle"
-                    className="text-[9px] fill-navy-slate font-black tracking-tighter"
+                    className="text-[9px] fill-muted font-black tracking-tighter"
                   >
                     {c.point.date.slice(5)} {/* MM-DD format */}
                   </text>
@@ -561,7 +561,7 @@ export default function ReportsAnalyticsDashboard() {
                   cx={c.x}
                   cy={c.y}
                   r="5"
-                  className="fill-crisp-white stroke-accent-blue stroke-2 cursor-pointer hover:r-7 transition-all duration-150"
+                  className="fill-white stroke-accent-active stroke-2 cursor-pointer hover:r-7 transition-all duration-150"
                   onMouseEnter={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
                     setActiveTooltip({
@@ -580,7 +580,7 @@ export default function ReportsAnalyticsDashboard() {
         {/* Hover Tooltip Overlay */}
         {activeTooltip && (
           <div
-            className="absolute z-10 bg-navy-dark text-crisp-white text-[10px] font-bold px-3 py-1.5 rounded shadow-lg border border-navy-medium pointer-events-none transform -translate-x-1/2 -translate-y-full"
+            className="absolute z-10 bg-[#1a1a1a] text-white text-[10px] font-bold px-3 py-1.5 rounded shadow-lg border border-border-color/30 pointer-events-none transform -translate-x-1/2 -translate-y-full"
             style={{ left: `${(activeTooltip.x / svgWidth) * 100}%`, top: `${(activeTooltip.y / svgHeight) * 100}%` }}
           >
             {activeTooltip.content}
@@ -600,15 +600,15 @@ export default function ReportsAnalyticsDashboard() {
     : "0.0";
 
   return (
-    <div className="bg-crisp-white border border-crisp-lightgray rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl">
+    <div className="bg-surface border border-border-color/30 rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl text-white">
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-8 border-b border-crisp-lightgray pb-6">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-8 border-b border-border-color/30 pb-6">
         <div>
           <div className="flex items-center space-x-3 mb-1">
-            <div className="w-3.5 h-6 bg-accent-blue rounded-full" />
-            <h2 className="text-2xl font-bold text-navy-dark tracking-tight">Reports & Performance Analytics</h2>
+            <div className="w-3.5 h-6 bg-accent-active rounded-full" />
+            <h2 className="text-2xl font-bold text-white tracking-tight">Reports & Performance Analytics</h2>
           </div>
-          <p className="text-xs text-navy-slate font-medium">
+          <p className="text-xs text-muted font-medium">
             Authorized QA review console for pricing audit. Supervisor: QA Reviewer (ID: MNVT-OP-9944)
           </p>
         </div>
@@ -616,7 +616,7 @@ export default function ReportsAnalyticsDashboard() {
         {/* CSV Export Trigger */}
         <button
           onClick={handleCSVExport}
-          className="bg-navy-dark hover:bg-accent-blue text-crisp-white px-5 py-2.5 rounded-lg text-xs font-extrabold uppercase tracking-wider shadow-sm transition-all duration-200 cursor-pointer flex items-center gap-2"
+          className="bg-accent-active hover:bg-accent-active/85 text-white px-5 py-2.5 rounded-lg text-xs font-extrabold uppercase tracking-wider shadow-sm transition-all duration-200 cursor-pointer flex items-center gap-2"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -626,36 +626,36 @@ export default function ReportsAnalyticsDashboard() {
       </div>
 
       {/* Control Filters Panel */}
-      <div className="bg-crisp-offwhite border border-crisp-lightgray rounded-xl p-6 mb-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="bg-[#1a1a1a]/40 border border-border-color/20 rounded-xl p-6 mb-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Date Filter Inputs */}
         <div className="grid grid-cols-2 gap-4 col-span-2">
           <div>
-            <label className="block text-[10px] font-black uppercase text-navy-slate tracking-wider mb-2">From Date</label>
+            <label className="block text-[10px] font-black uppercase text-muted tracking-wider mb-2">From Date</label>
             <input
               type="date"
               value={fromDate}
               onChange={(e) => setFromDate(e.target.value)}
-              className="w-full bg-crisp-white border border-crisp-lightgray rounded-lg px-3 py-2 text-xs font-bold text-navy-dark focus:outline-none focus:ring-2 focus:ring-accent-blue"
+              className="w-full bg-surface border border-border-color/30 rounded-lg px-3 py-2 text-xs font-bold text-white focus:outline-none focus:ring-2 focus:ring-accent-active"
             />
           </div>
           <div>
-            <label className="block text-[10px] font-black uppercase text-navy-slate tracking-wider mb-2">To Date</label>
+            <label className="block text-[10px] font-black uppercase text-muted tracking-wider mb-2">To Date</label>
             <input
               type="date"
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
-              className="w-full bg-crisp-white border border-crisp-lightgray rounded-lg px-3 py-2 text-xs font-bold text-navy-dark focus:outline-none focus:ring-2 focus:ring-accent-blue"
+              className="w-full bg-surface border border-border-color/30 rounded-lg px-3 py-2 text-xs font-bold text-white focus:outline-none focus:ring-2 focus:ring-accent-active"
             />
           </div>
         </div>
 
         {/* Simulation Edge Cases Toggles */}
         <div>
-          <label className="block text-[10px] font-black uppercase text-navy-slate tracking-wider mb-2">Simulation Audit Mode</label>
+          <label className="block text-[10px] font-black uppercase text-muted tracking-wider mb-2">Simulation Audit Mode</label>
           <select
             value={activeMode}
             onChange={(e) => setActiveMode(e.target.value as ModeType)}
-            className="w-full bg-crisp-white border border-crisp-lightgray rounded-lg px-3 py-2 text-xs font-bold text-navy-dark focus:outline-none focus:ring-2 focus:ring-accent-blue cursor-pointer"
+            className="w-full bg-surface border border-border-color/30 rounded-lg px-3 py-2 text-xs font-bold text-white focus:outline-none focus:ring-2 focus:ring-accent-active cursor-pointer"
           >
             <option value="real">Real Database API</option>
             <option value="mock_zero">Simulated: 0 Records (Empty State)</option>
@@ -667,9 +667,9 @@ export default function ReportsAnalyticsDashboard() {
 
       {/* Display Alert warning if DB is offline */}
       {errorState && activeMode === "real" && (
-        <div className="bg-amber-50 border-l-4 border-amber-500 text-amber-900 p-4 rounded-r-lg mb-8 text-xs font-medium flex items-center justify-between">
+        <div className="bg-amber-950/40 border-l-4 border-amber-600 text-amber-200 p-4 rounded-r-lg mb-8 text-xs font-medium flex items-center justify-between">
           <span>⚠️ {errorState}</span>
-          <span className="text-[10px] uppercase font-black tracking-wider bg-amber-200 text-amber-800 px-2.5 py-1 rounded">
+          <span className="text-[10px] uppercase font-black tracking-wider bg-amber-900/60 text-amber-200 border border-amber-800/40 px-2.5 py-1 rounded">
             Fallback Active
           </span>
         </div>
@@ -681,34 +681,34 @@ export default function ReportsAnalyticsDashboard() {
         <>
           {/* Summary KPI Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div className="bg-crisp-offwhite border border-crisp-lightgray rounded-lg p-5">
-              <span className="text-[10px] text-navy-slate font-black uppercase tracking-wider block mb-1">Total Bookings</span>
+            <div className="bg-[#1a1a1a]/50 border border-border-color/20 rounded-lg p-5">
+              <span className="text-[10px] text-muted font-black uppercase tracking-wider block mb-1">Total Bookings</span>
               <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-navy-dark">{animatedTotalBookings.toLocaleString("en-IN")}</span>
-                <span className="text-[10px] text-emerald-600 font-bold">Live Status</span>
+                <span className="text-2xl font-black text-white">{animatedTotalBookings.toLocaleString("en-IN")}</span>
+                <span className="text-[10px] text-accent-active font-bold">Live Status</span>
               </div>
             </div>
-            <div className="bg-crisp-offwhite border border-crisp-lightgray rounded-lg p-5">
-              <span className="text-[10px] text-navy-slate font-black uppercase tracking-wider block mb-1">Gross Revenue</span>
+            <div className="bg-[#1a1a1a]/50 border border-border-color/20 rounded-lg p-5">
+              <span className="text-[10px] text-muted font-black uppercase tracking-wider block mb-1">Gross Revenue</span>
               <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-navy-dark">
+                <span className="text-2xl font-black text-white">
                   ₹{animatedRevenue.toLocaleString("en-IN")}
                 </span>
-                <span className="text-[10px] text-accent-cyan font-bold">18% GST Inc.</span>
+                <span className="text-[10px] text-accent-active font-bold">18% GST Inc.</span>
               </div>
             </div>
-            <div className="bg-crisp-offwhite border border-crisp-lightgray rounded-lg p-5">
-              <span className="text-[10px] text-navy-slate font-black uppercase tracking-wider block mb-1">Billed Hours</span>
+            <div className="bg-[#1a1a1a]/50 border border-border-color/20 rounded-lg p-5">
+              <span className="text-[10px] text-muted font-black uppercase tracking-wider block mb-1">Billed Hours</span>
               <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-navy-dark">{animatedHours.toLocaleString("en-IN")} hrs</span>
-                <span className="text-[10px] text-navy-slate font-bold">Meter Duration</span>
+                <span className="text-2xl font-black text-white">{animatedHours.toLocaleString("en-IN")} hrs</span>
+                <span className="text-[10px] text-muted font-bold">Meter Duration</span>
               </div>
             </div>
-            <div className="bg-crisp-offwhite border border-crisp-lightgray rounded-lg p-5">
-              <span className="text-[10px] text-navy-slate font-black uppercase tracking-wider block mb-1">Average Duration</span>
+            <div className="bg-[#1a1a1a]/50 border border-border-color/20 rounded-lg p-5">
+              <span className="text-[10px] text-muted font-black uppercase tracking-wider block mb-1">Average Duration</span>
               <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-navy-dark">{animatedAvgDuration} hrs</span>
-                <span className="text-[10px] text-accent-gold font-bold">Per Booking</span>
+                <span className="text-2xl font-black text-white">{animatedAvgDuration} hrs</span>
+                <span className="text-[10px] text-accent-pending font-bold">Per Booking</span>
               </div>
             </div>
           </div>
@@ -716,16 +716,16 @@ export default function ReportsAnalyticsDashboard() {
           {/* Charts Panel */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Status Bar Chart */}
-            <div className="lg:col-span-1 border border-crisp-lightgray rounded-lg p-6 bg-crisp-offwhite">
-              <h3 className="text-sm font-bold text-navy-dark mb-4 uppercase tracking-wider">
+            <div className="lg:col-span-1 border border-border-color/20 rounded-lg p-6 bg-[#1a1a1a]/50">
+              <h3 className="text-sm font-bold text-white mb-4 uppercase tracking-wider">
                 Booking Status Metrics
               </h3>
               {renderStatusChart()}
             </div>
 
             {/* Performance Time Series Line Chart */}
-            <div className="lg:col-span-2 border border-crisp-lightgray rounded-lg p-6 bg-crisp-offwhite">
-              <h3 className="text-sm font-bold text-navy-dark mb-4 uppercase tracking-wider">
+            <div className="lg:col-span-2 border border-border-color/20 rounded-lg p-6 bg-[#1a1a1a]/50">
+              <h3 className="text-sm font-bold text-white mb-4 uppercase tracking-wider">
                 30-Day Revenue Trend (INR)
               </h3>
               {renderTrendChart()}

@@ -110,27 +110,26 @@ export default function ChauffeurServiceHourlyBookingEditForm({
       setErrorMessage(err.message || "An unexpected error occurred.");
     }
   };
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-dark/60 backdrop-blur-sm">
-      <div className="bg-crisp-white border border-crisp-lightgray max-w-lg w-full rounded-2xl shadow-2xl relative overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+      <div className="bg-surface border border-border-color/30 max-w-lg w-full rounded-2xl shadow-2xl relative overflow-hidden text-white">
         {/* Top accent bar */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent-blue to-accent-cyan" />
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent-active to-accent-pending" />
 
         <div className="p-6 sm:p-8">
           {/* Header */}
-          <div className="flex justify-between items-start mb-6 pb-4 border-b border-crisp-lightgray">
+          <div className="flex justify-between items-start mb-6 pb-4 border-b border-border-color/30">
             <div>
-              <h3 className="text-lg font-black text-navy-dark tracking-tight">
+              <h3 className="text-lg font-black text-white tracking-tight">
                 Edit Booking Record
               </h3>
-              <p className="text-[10px] text-navy-slate font-bold uppercase tracking-wider mt-1">
+              <p className="text-[10px] text-muted font-bold uppercase tracking-wider mt-1">
                 ID: {booking.id.slice(0, 8)}... | Operator: Lead Operator
               </p>
             </div>
             <button
               onClick={onClose}
-              className="text-navy-slate hover:text-navy-dark font-extrabold text-lg transition-colors"
+              className="text-muted hover:text-white font-extrabold text-lg transition-colors"
             >
               ✕
             </button>
@@ -142,13 +141,13 @@ export default function ChauffeurServiceHourlyBookingEditForm({
               {/* Live Meter */}
               <div className="flex flex-col">
                 <label
-                  className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2"
+                  className="block text-xs font-bold text-muted uppercase tracking-wider mb-2"
                   htmlFor="edit_live_meter"
                 >
-                  Live Meter & Billing (₹) <span className="text-rose-500">*</span>
+                  Live Meter &amp; Billing (₹) <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-navy-slate font-extrabold text-sm">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted font-extrabold text-sm">
                     ₹
                   </span>
                   <input
@@ -157,15 +156,15 @@ export default function ChauffeurServiceHourlyBookingEditForm({
                     type="number"
                     value={formData.live_meter_and_billing}
                     onChange={handleChange}
-                    className={`w-full pl-8 pr-4 py-3 bg-crisp-offwhite/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-cyan focus:border-transparent text-navy-dark text-sm font-semibold transition-all ${
+                    className={`w-full pl-8 pr-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white text-sm font-semibold transition-all ${
                       errors.live_meter_and_billing
-                        ? "border-rose-400 ring-2 ring-rose-100"
-                        : "border-crisp-lightgray"
+                        ? "border-rose-500 ring-2 ring-rose-950/40"
+                        : "border-border-color/30"
                     }`}
                   />
                 </div>
                 {errors.live_meter_and_billing && (
-                  <p className="text-rose-600 text-[11px] font-bold mt-1.5">
+                  <p className="text-rose-400 text-[11px] font-bold mt-1.5">
                     {errors.live_meter_and_billing}
                   </p>
                 )}
@@ -174,7 +173,7 @@ export default function ChauffeurServiceHourlyBookingEditForm({
               {/* Status */}
               <div className="flex flex-col">
                 <label
-                  className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2"
+                  className="block text-xs font-bold text-muted uppercase tracking-wider mb-2"
                   htmlFor="edit_status"
                 >
                   Booking Status
@@ -184,17 +183,17 @@ export default function ChauffeurServiceHourlyBookingEditForm({
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-crisp-offwhite/50 border border-crisp-lightgray rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-cyan focus:border-transparent text-navy-dark text-sm font-semibold cursor-pointer transition-all"
+                  className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white text-sm font-semibold cursor-pointer transition-all"
                 >
-                  <option value="Active">Active</option>
-                  <option value="Completed">Completed</option>
-                  <option value="Cancelled">Cancelled</option>
+                  <option value="Active" className="bg-surface text-white">Active</option>
+                  <option value="Completed" className="bg-surface text-white">Completed</option>
+                  <option value="Cancelled" className="bg-surface text-white">Cancelled</option>
                 </select>
               </div>
 
-              {/* Created Date (read-only display) */}
+              {/* Created Date */}
               <div className="flex flex-col md:col-span-2">
-                <label className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-muted uppercase tracking-wider mb-2">
                   Created Date
                 </label>
                 <input
@@ -202,7 +201,7 @@ export default function ChauffeurServiceHourlyBookingEditForm({
                   name="created_date"
                   value={formData.created_date}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-crisp-offwhite/30 border border-crisp-lightgray rounded-lg text-navy-dark text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-all"
+                  className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-accent-active transition-all"
                 />
               </div>
             </div>
@@ -210,7 +209,7 @@ export default function ChauffeurServiceHourlyBookingEditForm({
             {/* Notes */}
             <div className="flex flex-col">
               <label
-                className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2"
+                className="block text-xs font-bold text-muted uppercase tracking-wider mb-2"
                 htmlFor="edit_notes"
               >
                 Notes <span className="text-rose-500">*</span>
@@ -221,14 +220,14 @@ export default function ChauffeurServiceHourlyBookingEditForm({
                 rows={3}
                 value={formData.notes}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-crisp-offwhite/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-cyan focus:border-transparent text-navy-dark text-sm font-semibold resize-none transition-all ${
+                className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active focus:border-transparent text-white text-sm font-semibold resize-none transition-all ${
                   errors.notes
-                    ? "border-rose-400 ring-2 ring-rose-100"
-                    : "border-crisp-lightgray"
+                    ? "border-rose-500 ring-2 ring-rose-950/40"
+                    : "border-border-color/30"
                 }`}
               />
               {errors.notes && (
-                <p className="text-rose-600 text-[11px] font-bold mt-1.5">{errors.notes}</p>
+                <p className="text-rose-400 text-[11px] font-bold mt-1.5">{errors.notes}</p>
               )}
             </div>
 
@@ -237,14 +236,14 @@ export default function ChauffeurServiceHourlyBookingEditForm({
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 py-3 bg-crisp-offwhite hover:bg-crisp-lightgray text-navy-dark font-bold rounded-lg text-xs tracking-wide transition-all border border-crisp-lightgray active:scale-[0.98]"
+                className="flex-1 py-3 bg-[#1e1e1e] hover:bg-[#2a2a2a] text-white font-bold rounded-lg text-xs tracking-wide transition-all border border-border-color/30 active:scale-[0.98]"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={submitState === "loading"}
-                className="flex-1 py-3 bg-accent-blue hover:bg-navy-dark text-crisp-white font-bold rounded-lg text-xs tracking-wide shadow-md transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 py-3 bg-accent-active hover:bg-accent-active/85 text-white font-bold rounded-lg text-xs tracking-wide shadow-md transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {submitState === "loading" ? "Saving..." : "Save Changes"}
               </button>
@@ -253,12 +252,12 @@ export default function ChauffeurServiceHourlyBookingEditForm({
 
           {/* Success / Error Feedback */}
           {submitState === "success" && (
-            <div className="mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-sm text-emerald-800 font-bold flex items-center gap-2">
+            <div className="mt-4 p-4 bg-emerald-950/20 border border-emerald-800/30 rounded-lg text-sm text-emerald-300 font-bold flex items-center gap-2">
               <span>✓</span> Booking updated successfully.
             </div>
           )}
           {submitState === "error" && (
-            <div className="mt-4 p-4 bg-rose-50 border border-rose-200 rounded-lg text-sm text-rose-800 font-bold flex items-center gap-2">
+            <div className="mt-4 p-4 bg-rose-950/20 border border-rose-900/40 rounded-lg text-sm text-rose-300 font-bold flex items-center gap-2">
               <span>✕</span> {errorMessage}
             </div>
           )}

@@ -162,30 +162,30 @@ export default function PaymentBillingTracker() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-crisp-white border border-crisp-lightgray rounded-2xl shadow-xl p-6 sm:p-8 transition-all duration-300 hover:shadow-2xl">
+    <div className="relative overflow-hidden bg-surface border border-border-color/30 rounded-2xl shadow-xl p-6 sm:p-8 transition-all duration-300 hover:shadow-2xl text-white">
       {/* Visual Accent Bar */}
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-navy-medium to-accent-blue" />
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent-active to-accent-pending" />
 
       {/* Header */}
-      <div className="flex justify-between items-center mb-6 border-b border-crisp-lightgray pb-4">
+      <div className="flex justify-between items-center mb-6 border-b border-border-color/30 pb-4">
         <div className="flex items-center space-x-3">
-          <div className="w-3 h-6 bg-accent-blue rounded-full" />
+          <div className="w-3 h-6 bg-accent-active rounded-full" />
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-navy-dark tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
               Payment &amp; Billing Tracker
             </h2>
-            <p className="text-[10px] text-navy-slate font-bold uppercase tracking-wider mt-0.5">
+            <p className="text-[10px] text-muted font-bold uppercase tracking-wider mt-0.5">
               System Lead: Lead Operator | ID: MNVT-OP-9944
             </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           {isOffline && (
-            <span className="text-[9px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded uppercase border border-amber-200">
+            <span className="text-[9px] bg-amber-950/40 text-amber-300 font-bold px-2 py-0.5 rounded uppercase border border-amber-800/40">
               Fallback
             </span>
           )}
-          <span className="text-xs font-semibold bg-accent-gold/20 text-navy-dark border border-accent-gold/50 px-3 py-1.5 rounded-full">
+          <span className="text-xs font-semibold bg-accent-pending/20 text-accent-pending border border-accent-pending/40 px-3 py-1.5 rounded-full">
             Invoice Processing
           </span>
         </div>
@@ -197,23 +197,23 @@ export default function PaymentBillingTracker() {
         <div className="space-y-6">
           {/* Booking Selector */}
           <div>
-            <label className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-muted uppercase tracking-wider mb-2">
               Select Booking Record <span className="text-rose-500">*</span>
             </label>
             <select
               value={selectedId}
               onChange={handleBookingChange}
               disabled={isSubmitting}
-              className="w-full px-4 py-3 bg-crisp-offwhite/50 border border-crisp-lightgray rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue text-navy-dark text-sm font-semibold cursor-pointer transition-all"
+              className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active text-white text-sm font-semibold cursor-pointer transition-all"
             >
               {bookings.map((b) => (
-                <option key={b.id} value={b.id}>
+                <option key={b.id} value={b.id} className="bg-surface text-white">
                   ₹{b.liveMeterAndBilling.toLocaleString("en-IN")} — {b.customer?.name || "Unknown"} ({b.status}) — {new Date(b.createdDate).toLocaleDateString("en-IN")}
                 </option>
               ))}
             </select>
             {selectedBooking && (
-              <p className="text-[10px] text-navy-slate font-mono mt-1.5">
+              <p className="text-[10px] text-muted font-mono mt-1.5">
                 UUID: {selectedBooking.id}
               </p>
             )}
@@ -221,32 +221,32 @@ export default function PaymentBillingTracker() {
 
           {/* Billing Breakdown */}
           {billing && (
-            <div className="space-y-3 bg-crisp-offwhite rounded-lg p-5 border border-crisp-lightgray">
-              <p className="text-[10px] font-black text-navy-slate uppercase tracking-wider mb-3">
+            <div className="space-y-3 bg-background rounded-lg p-5 border border-border-color/20">
+              <p className="text-[10px] font-black text-muted uppercase tracking-wider mb-3">
                 Billing Breakdown
               </p>
               <div className="flex justify-between text-sm">
-                <span className="text-navy-slate">Base Fare</span>
-                <span className="font-semibold text-navy-dark">₹{billing.baseTotal.toFixed(2)}</span>
+                <span className="text-muted">Base Fare</span>
+                <span className="font-semibold text-white">₹{billing.baseTotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-navy-slate">Peak Hour Surcharge (+15%)</span>
-                <span className="font-semibold text-navy-dark">₹{billing.peakSurcharge.toFixed(2)}</span>
+                <span className="text-muted">Peak Hour Surcharge (+15%)</span>
+                <span className="font-semibold text-white">₹{billing.peakSurcharge.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-sm border-t border-crisp-lightgray pt-3">
-                <span className="text-navy-slate">GST Tax (18%)</span>
-                <span className="font-semibold text-navy-dark">₹{billing.gst.toFixed(2)}</span>
+              <div className="flex justify-between text-sm border-t border-border-color/20 pt-3">
+                <span className="text-muted">GST Tax (18%)</span>
+                <span className="font-semibold text-white">₹{billing.gst.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between items-center border-t border-crisp-lightgray pt-3">
-                <span className="text-navy-dark font-black">Total Amount</span>
-                <span className="text-xl font-black text-navy-dark">₹{billing.total.toLocaleString("en-IN")}</span>
+              <div className="flex justify-between items-center border-t border-border-color/20 pt-3">
+                <span className="text-white font-black">Total Amount</span>
+                <span className="text-xl font-black text-white">₹{billing.total.toLocaleString("en-IN")}</span>
               </div>
             </div>
           )}
 
           {/* Payment Method */}
           <div>
-            <label className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-muted uppercase tracking-wider mb-2">
               Payment Method <span className="text-rose-500">*</span>
             </label>
             <div className="grid grid-cols-2 gap-2">
@@ -258,8 +258,8 @@ export default function PaymentBillingTracker() {
                   onClick={() => setMethod(m)}
                   className={`py-2.5 px-3 rounded-lg text-xs font-bold border transition-all ${
                     method === m
-                      ? "bg-navy-dark text-crisp-white border-navy-dark shadow-md"
-                      : "bg-crisp-offwhite text-navy-dark border-crisp-lightgray hover:bg-crisp-lightgray/50"
+                      ? "bg-accent-active text-white border-accent-active shadow-md"
+                      : "bg-[#1e1e1e] text-white border-border-color/30 hover:bg-[#2a2a2a]"
                   }`}
                 >
                   {PAYMENT_METHOD_LABELS[m]}
@@ -270,9 +270,9 @@ export default function PaymentBillingTracker() {
 
           {/* Transaction Reference (optional) */}
           <div>
-            <label className="block text-xs font-bold text-navy-medium uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-muted uppercase tracking-wider mb-2">
               Transaction Reference{" "}
-              <span className="text-navy-slate font-normal normal-case">(optional, min 3 chars)</span>
+              <span className="text-muted font-normal normal-case">(optional, min 3 chars)</span>
             </label>
             <input
               type="text"
@@ -280,31 +280,31 @@ export default function PaymentBillingTracker() {
               disabled={isSubmitting}
               onChange={(e) => setTransactionRef(e.target.value)}
               placeholder="e.g. TXN-UPI-9944, NEFT-REF-001..."
-              className="w-full px-4 py-3 bg-crisp-offwhite/50 border border-crisp-lightgray rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue text-navy-dark text-sm font-semibold placeholder-navy-slate transition-all"
+              className="w-full px-4 py-3 bg-background border border-border-color/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-active text-white text-sm font-semibold placeholder-muted transition-all"
             />
           </div>
 
           {/* API Error */}
           {apiError && (
-            <div className="p-4 bg-rose-50 border border-rose-200 text-rose-800 rounded-lg text-xs font-semibold flex items-start gap-2.5">
+            <div className="p-4 bg-rose-950/20 border border-rose-800/40 text-rose-300 rounded-lg text-xs font-semibold flex items-start gap-2.5">
               <span className="text-sm">⚠️</span>
               <div>
-                <p className="font-extrabold text-rose-900">Payment Processing Failed</p>
-                <p className="mt-0.5 text-rose-700">{apiError}</p>
+                <p className="font-extrabold text-rose-200">Payment Processing Failed</p>
+                <p className="mt-0.5 text-rose-400">{apiError}</p>
               </div>
             </div>
           )}
 
           {/* Payment Success */}
           {paymentResult && (
-            <div className="p-5 bg-emerald-50 border border-emerald-200 rounded-lg text-xs text-emerald-900 animate-fadeIn">
-              <p className="font-extrabold flex items-center mb-2 text-emerald-800">
+            <div className="p-5 bg-emerald-950/20 border border-emerald-800/30 rounded-lg text-xs text-emerald-300 animate-fadeIn">
+              <p className="font-extrabold flex items-center mb-2 text-emerald-200">
                 <span className="mr-2">✓</span> Payment Record Created Successfully
               </p>
-              <ul className="space-y-1 font-semibold text-emerald-800">
+              <ul className="space-y-1 font-semibold text-emerald-400">
                 <li>
                   <strong>Payment UUID:</strong>{" "}
-                  <span className="font-mono bg-emerald-100/60 px-1.5 py-0.5 rounded text-[10px] border border-emerald-200">
+                  <span className="font-mono bg-[#1e1e1e] px-1.5 py-0.5 rounded text-[10px] border border-border-color/30 text-white">
                     {paymentResult.id}
                   </span>
                 </li>
@@ -326,7 +326,7 @@ export default function PaymentBillingTracker() {
             <button
               onClick={() => window.print()}
               disabled={isSubmitting}
-              className="py-3 bg-crisp-offwhite hover:bg-crisp-lightgray text-navy-medium font-bold rounded-lg border border-crisp-lightgray transition-all text-sm"
+              className="py-3 bg-[#1e1e1e] hover:bg-[#2a2a2a] text-white font-bold rounded-lg border border-border-color/30 transition-all text-sm"
             >
               Print Invoice
             </button>
@@ -335,8 +335,8 @@ export default function PaymentBillingTracker() {
               disabled={isSubmitting || !selectedBooking}
               className={`py-3 font-bold rounded-lg shadow-md transition-all duration-200 text-sm flex items-center justify-center gap-2 ${
                 isSubmitting || !selectedBooking
-                  ? "bg-navy-medium/60 text-crisp-white/80 cursor-not-allowed"
-                  : "bg-navy-medium hover:bg-navy-dark text-crisp-white cursor-pointer"
+                  ? "bg-accent-active/60 text-white/80 cursor-not-allowed"
+                  : "bg-accent-active hover:bg-accent-active/85 text-white cursor-pointer"
               }`}
             >
               {isSubmitting ? "Processing..." : "Process Payment"}

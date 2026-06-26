@@ -9,25 +9,33 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // ── New Dark Theme Palette ──────────────────────────────────
+        background: "#000000",      // Pure black — deep page background
+        surface: "#121212",         // Primary surface — Bento Grid / cards
+        "border-color": "#64748B",  // Neutral — subtle dividers & borders
+        muted: "#94A3B8",           // Light neutral — secondary / label text
+        accent: {
+          active:  "#008542",       // Secondary green — live meters / active rides
+          pending: "#D97706",       // Tertiary amber — alerts / pending statuses
+        },
+
+        // ── Legacy aliases kept so any remaining token refs resolve ──
+        // (will be overridden in components but kept for safety)
         navy: {
-          dark: "#0B132B",      // Deepest Navy
-          medium: "#1C2541",    // Classic Navy Blue
-          light: "#3A506B",     // Soft Navy/Steel Blue
-          slate: "#5C6B73",     // Cool Slate
+          dark:   "#000000",
+          medium: "#121212",
+          light:  "#1E1E1E",
+          slate:  "#94A3B8",
         },
         crisp: {
-          white: "#FFFFFF",     // Pure Crisp White
-          offwhite: "#F8FAFC",  // Soft Slate-White background
-          lightgray: "#E2E8F0", // Cool Gray borders
+          white:     "#FFFFFF",
+          offwhite:  "#121212",
+          lightgray: "#64748B",
         },
-        accent: {
-          cyan: "#48CAE4",      // High contrast ice blue/cyan
-          blue: "#0077B6",      // Active state blue (Antigravity feel)
-          gold: "#D4AF37",      // Premium/luxury gold accent for booking tiers
-        }
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "Inter", "sans-serif"],
+        sans: ["Inter", "var(--font-geist-sans)", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "monospace"],
       },
     },
   },

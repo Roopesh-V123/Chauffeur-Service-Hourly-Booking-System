@@ -164,35 +164,35 @@ export default function DashboardSummaryWidget() {
           transition: opacity 0.28s ease;
           pointer-events: none;
         }
-        /* Bookings card — cyan glow */
+        /* Bookings card — green glow */
         .kpi-card-bookings::after {
-          background: linear-gradient(135deg, rgba(72,202,228,0.06) 0%, transparent 70%);
+          background: linear-gradient(135deg, rgba(0,133,66,0.06) 0%, transparent 70%);
         }
         .kpi-card-bookings:hover::after { opacity: 1; }
         .kpi-card-bookings:hover {
-          box-shadow: 0 8px 32px rgba(72,202,228,0.18), 0 2px 8px rgba(11,19,43,0.08);
+          box-shadow: 0 8px 32px rgba(0,133,66,0.18), 0 2px 8px rgba(0,0,0,0.5);
           transform: translateY(-3px);
-          border-color: rgba(72,202,228,0.45) !important;
+          border-color: rgba(0,133,66,0.45) !important;
         }
-        /* Balance card — gold glow */
+        /* Balance card — amber glow */
         .kpi-card-balance::after {
-          background: linear-gradient(135deg, rgba(212,175,55,0.07) 0%, transparent 70%);
+          background: linear-gradient(135deg, rgba(217,119,6,0.07) 0%, transparent 70%);
         }
         .kpi-card-balance:hover::after { opacity: 1; }
         .kpi-card-balance:hover {
-          box-shadow: 0 8px 32px rgba(212,175,55,0.18), 0 2px 8px rgba(11,19,43,0.08);
+          box-shadow: 0 8px 32px rgba(217,119,6,0.18), 0 2px 8px rgba(0,0,0,0.5);
           transform: translateY(-3px);
-          border-color: rgba(212,175,55,0.45) !important;
+          border-color: rgba(217,119,6,0.45) !important;
         }
-        /* Alerts card — blue glow */
+        /* Alerts card — neutral/muted glow */
         .kpi-card-alerts::after {
-          background: linear-gradient(135deg, rgba(0,119,182,0.06) 0%, transparent 70%);
+          background: linear-gradient(135deg, rgba(148,163,184,0.06) 0%, transparent 70%);
         }
         .kpi-card-alerts:hover::after { opacity: 1; }
         .kpi-card-alerts:hover {
-          box-shadow: 0 8px 32px rgba(0,119,182,0.14), 0 2px 8px rgba(11,19,43,0.08);
+          box-shadow: 0 8px 32px rgba(148,163,184,0.14), 0 2px 8px rgba(0,0,0,0.5);
           transform: translateY(-3px);
-          border-color: rgba(0,119,182,0.35) !important;
+          border-color: rgba(148,163,184,0.35) !important;
         }
 
         /* Icon bubble ring on hover */
@@ -203,13 +203,13 @@ export default function DashboardSummaryWidget() {
           transform: scale(1.15);
         }
         .kpi-card-bookings:hover .kpi-icon-bubble {
-          box-shadow: 0 0 0 6px rgba(72,202,228,0.15);
+          box-shadow: 0 0 0 6px rgba(0,133,66,0.15);
         }
         .kpi-card-balance:hover .kpi-icon-bubble {
-          box-shadow: 0 0 0 6px rgba(212,175,55,0.15);
+          box-shadow: 0 0 0 6px rgba(217,119,6,0.15);
         }
         .kpi-card-alerts:hover .kpi-icon-bubble {
-          box-shadow: 0 0 0 6px rgba(0,119,182,0.12);
+          box-shadow: 0 0 0 6px rgba(148,163,184,0.12);
         }
 
         /* Alert row hover */
@@ -218,7 +218,7 @@ export default function DashboardSummaryWidget() {
           cursor: default;
         }
         .alert-row:hover {
-          filter: brightness(0.96);
+          filter: brightness(1.2);
           transform: translateX(3px);
         }
 
@@ -226,34 +226,34 @@ export default function DashboardSummaryWidget() {
         .kpi-sublabel {
           transition: color 0.22s ease;
         }
-        .kpi-card-bookings:hover .kpi-sublabel { color: #0077B6; }
-        .kpi-card-balance:hover  .kpi-sublabel { color: #b8881e; }
+        .kpi-card-bookings:hover .kpi-sublabel { color: #008542; }
+        .kpi-card-balance:hover  .kpi-sublabel { color: #D97706; }
       `}</style>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 
         {/* ── KPI 1: Active Rides ── */}
         <div
-          className="kpi-card kpi-card-bookings bg-crisp-white/85 backdrop-blur-md border border-crisp-lightgray rounded-xl p-6 shadow-md flex items-center justify-between"
+          className="kpi-card kpi-card-bookings bg-surface/85 backdrop-blur-md border border-border-color/30 rounded-xl p-6 shadow-md flex items-center justify-between"
           onMouseEnter={() => setHoverBookings(true)}
           onMouseLeave={() => setHoverBookings(false)}
         >
           <div>
-            <span className="text-[10px] text-navy-slate font-black uppercase tracking-wider block mb-1">
+            <span className="text-[10px] text-muted font-black uppercase tracking-wider block mb-1">
               Active Bookings
             </span>
             <h3
-              className={`text-3xl font-black text-navy-dark leading-none transition-colors duration-200 ${
-                hoverBookings ? "text-accent-cyan kpi-num-hover" : ""
+              className={`text-3xl font-black text-white leading-none transition-colors duration-200 ${
+                hoverBookings ? "text-accent-active kpi-num-hover" : ""
               }`}
             >
               {animatedBookings.toLocaleString("en-IN")}
             </h3>
-            <p className="kpi-sublabel text-[10px] text-accent-cyan font-bold mt-2">
+            <p className="kpi-sublabel text-[10px] text-accent-active font-bold mt-2">
               Vehicles currently on trip
             </p>
           </div>
-          <div className="kpi-icon-bubble w-12 h-12 rounded-full bg-accent-cyan/10 flex items-center justify-center text-accent-cyan flex-shrink-0 ml-2">
+          <div className="kpi-icon-bubble w-12 h-12 rounded-full bg-accent-active/10 flex items-center justify-center text-accent-active flex-shrink-0 ml-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
             </svg>
@@ -262,26 +262,26 @@ export default function DashboardSummaryWidget() {
 
         {/* ── KPI 2: Outstanding Balance ── */}
         <div
-          className="kpi-card kpi-card-balance bg-crisp-white/85 backdrop-blur-md border border-crisp-lightgray rounded-xl p-6 shadow-md flex items-center justify-between"
+          className="kpi-card kpi-card-balance bg-surface/85 backdrop-blur-md border border-border-color/30 rounded-xl p-6 shadow-md flex items-center justify-between"
           onMouseEnter={() => setHoverBalance(true)}
           onMouseLeave={() => setHoverBalance(false)}
         >
           <div>
-            <span className="text-[10px] text-navy-slate font-black uppercase tracking-wider block mb-1">
+            <span className="text-[10px] text-muted font-black uppercase tracking-wider block mb-1">
               Pending Balance
             </span>
             <h3
-              className={`text-3xl font-black text-navy-dark leading-none text-ellipsis overflow-hidden max-w-[150px] transition-colors duration-200 ${
-                hoverBalance ? "text-accent-gold kpi-num-hover" : ""
+              className={`text-3xl font-black text-white leading-none text-ellipsis overflow-hidden max-w-[150px] transition-colors duration-200 ${
+                hoverBalance ? "text-accent-pending kpi-num-hover" : ""
               }`}
             >
               ₹{animatedBalance.toLocaleString("en-IN")}
             </h3>
-            <p className="kpi-sublabel text-[10px] text-accent-gold font-bold mt-2">
+            <p className="kpi-sublabel text-[10px] text-accent-pending font-bold mt-2">
               Across {animatedPending} pending invoices
             </p>
           </div>
-          <div className="kpi-icon-bubble w-12 h-12 rounded-full bg-accent-gold/10 flex items-center justify-center text-accent-gold flex-shrink-0 ml-2">
+          <div className="kpi-icon-bubble w-12 h-12 rounded-full bg-accent-pending/10 flex items-center justify-center text-accent-pending flex-shrink-0 ml-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -290,7 +290,7 @@ export default function DashboardSummaryWidget() {
 
         {/* ── Dynamic Alerts/Notifications Panel ── */}
         <div
-          className="kpi-card kpi-card-alerts bg-crisp-white/85 backdrop-blur-md border border-crisp-lightgray rounded-xl p-6 shadow-md flex flex-col justify-between"
+          className="kpi-card kpi-card-alerts bg-surface/85 backdrop-blur-md border border-border-color/30 rounded-xl p-6 shadow-md flex flex-col justify-between"
           onMouseEnter={() => setHoverAlerts(true)}
           onMouseLeave={() => setHoverAlerts(false)}
         >
@@ -298,19 +298,19 @@ export default function DashboardSummaryWidget() {
             <div className="flex justify-between items-center mb-3">
               <div className="flex items-center gap-2">
                 <div
-                  className="kpi-icon-bubble w-7 h-7 rounded-full bg-accent-blue/10 flex items-center justify-center text-accent-blue"
+                  className="kpi-icon-bubble w-7 h-7 rounded-full bg-accent-active/10 flex items-center justify-center text-accent-active"
                   style={{ minWidth: "28px" }}
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                   </svg>
                 </div>
-                <span className="text-[10px] text-navy-slate font-black uppercase tracking-wider">
+                <span className="text-[10px] text-muted font-black uppercase tracking-wider">
                   Alerts & Notifications
                 </span>
               </div>
               {isOffline && (
-                <span className="text-[8px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded uppercase">
+                <span className="text-[8px] bg-amber-950/50 text-amber-200 border border-amber-800/40 font-bold px-2 py-0.5 rounded uppercase">
                   Simulated
                 </span>
               )}
@@ -323,17 +323,17 @@ export default function DashboardSummaryWidget() {
                     key={alert.id}
                     className={`alert-row flex items-start gap-2 p-2 rounded-lg text-[9px] font-semibold leading-relaxed border ${
                       alert.type === "warning"
-                        ? "bg-amber-50/70 border-amber-200 text-amber-900"
-                        : "bg-blue-50/70 border-blue-200 text-blue-900"
+                        ? "bg-amber-950/30 border-amber-900/40 text-amber-200"
+                        : "bg-surface border-border-color/20 text-muted"
                     }`}
                   >
                     <div className="mt-0.5 flex-shrink-0">
                       {alert.type === "warning" ? (
-                        <svg className="w-3 h-3 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3 text-accent-pending" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                         </svg>
                       ) : (
-                        <svg className="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3 text-accent-active" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       )}
@@ -342,7 +342,7 @@ export default function DashboardSummaryWidget() {
                   </div>
                 ))
               ) : (
-                <p className="text-[10px] text-navy-slate font-medium">No active system alerts.</p>
+                <p className="text-[10px] text-muted font-medium">No active system alerts.</p>
               )}
             </div>
           </div>

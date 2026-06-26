@@ -70,14 +70,15 @@ export default function Home() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className="min-h-screen bg-crisp-offwhite text-navy-dark font-sans flex">
+    <div className="min-h-screen bg-background text-foreground font-sans flex">
 
       {/* ── Sidebar ── */}
       <aside
         style={{
           width: sidebarCollapsed ? "72px" : "260px",
           transition: "width 300ms cubic-bezier(0.4,0,0.2,1)",
-          background: "linear-gradient(180deg, #0B132B 0%, #1C2541 60%, #0B132B 100%)",
+          background: "linear-gradient(180deg, #121212 0%, #000000 100%)",
+          borderRight: "1px solid rgba(100, 116, 139, 0.2)",
           flexShrink: 0,
           display: "flex",
           flexDirection: "column",
@@ -86,7 +87,7 @@ export default function Home() {
           left: 0,
           bottom: 0,
           zIndex: 50,
-          boxShadow: "4px 0 24px 0 rgba(0,0,0,0.28)",
+          boxShadow: "4px 0 24px 0 rgba(0,0,0,0.5)",
           overflow: "hidden",
         }}
       >
@@ -97,7 +98,7 @@ export default function Home() {
             display: "flex",
             alignItems: "center",
             gap: "14px",
-            borderBottom: "1px solid rgba(255,255,255,0.07)",
+            borderBottom: "1px solid rgba(100, 116, 139, 0.15)",
             minHeight: "88px",
             transition: "padding 300ms ease",
           }}
@@ -107,7 +108,7 @@ export default function Home() {
               width: "40px",
               height: "40px",
               borderRadius: "10px",
-              background: "linear-gradient(135deg, #0077B6, #48CAE4)",
+              background: "linear-gradient(135deg, #008542, #00b057)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -115,7 +116,7 @@ export default function Home() {
               fontSize: "1.2rem",
               color: "#fff",
               flexShrink: 0,
-              boxShadow: "0 4px 14px rgba(0,119,182,0.4)",
+              boxShadow: "0 4px 14px rgba(0,133,66,0.4)",
               letterSpacing: "0.08em",
             }}
           >
@@ -126,7 +127,7 @@ export default function Home() {
               <div style={{ color: "#fff", fontWeight: 800, fontSize: "0.95rem", whiteSpace: "nowrap", lineHeight: 1.2 }}>
                 Manivtha Tours
               </div>
-              <div style={{ color: "#48CAE4", fontWeight: 700, fontSize: "0.6rem", letterSpacing: "0.13em", textTransform: "uppercase", marginTop: "3px", whiteSpace: "nowrap" }}>
+              <div style={{ color: "#008542", fontWeight: 700, fontSize: "0.6rem", letterSpacing: "0.13em", textTransform: "uppercase", marginTop: "3px", whiteSpace: "nowrap" }}>
                 Chauffeur Booking Platform
               </div>
             </div>
@@ -164,11 +165,11 @@ export default function Home() {
                   width: "100%",
                   transition: "all 200ms ease",
                   background: isActive
-                    ? "linear-gradient(135deg, rgba(0,119,182,0.85), rgba(72,202,228,0.18))"
+                    ? "linear-gradient(135deg, rgba(0,133,66,0.85), rgba(0,133,66,0.18))"
                     : "transparent",
                   color: isActive ? "#fff" : "rgba(255,255,255,0.55)",
-                  boxShadow: isActive ? "0 2px 12px rgba(0,119,182,0.25)" : "none",
-                  borderLeft: isActive && !sidebarCollapsed ? "3px solid #48CAE4" : "3px solid transparent",
+                  boxShadow: isActive ? "0 2px 12px rgba(0,133,66,0.25)" : "none",
+                  borderLeft: isActive && !sidebarCollapsed ? "3px solid #008542" : "3px solid transparent",
                   marginLeft: sidebarCollapsed ? "0" : undefined,
                   paddingLeft: isActive && !sidebarCollapsed ? "11px" : undefined,
                 }}
@@ -199,10 +200,10 @@ export default function Home() {
 
         {/* Status Indicator */}
         {!sidebarCollapsed && (
-          <div style={{ margin: "0 12px 12px 12px", padding: "12px 14px", borderRadius: "10px", background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.18)" }}>
+          <div style={{ margin: "0 12px 12px 12px", padding: "12px 14px", borderRadius: "10px", background: "rgba(0,133,66,0.08)", border: "1px solid rgba(0,133,66,0.18)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#10B981", display: "inline-block", animation: "pulse 2s infinite" }} />
-              <span style={{ color: "#10B981", fontWeight: 700, fontSize: "0.68rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>System Live</span>
+              <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#008542", display: "inline-block", animation: "pulse 2s infinite" }} />
+              <span style={{ color: "#008542", fontWeight: 700, fontSize: "0.68rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>System Live</span>
             </div>
             <div style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.62rem", marginTop: "4px" }}>Integration Dashboard Active</div>
           </div>
@@ -253,13 +254,14 @@ export default function Home() {
           display: "flex",
           flexDirection: "column",
           minHeight: "100vh",
+          backgroundColor: "#000000",
         }}
       >
         {/* Top Bar */}
         <header
           style={{
-            background: "#fff",
-            borderBottom: "1px solid #E2E8F0",
+            background: "#121212",
+            borderBottom: "1px solid rgba(100, 116, 139, 0.3)",
             padding: "0 32px",
             height: "64px",
             display: "flex",
@@ -268,19 +270,19 @@ export default function Home() {
             position: "sticky",
             top: 0,
             zIndex: 40,
-            boxShadow: "0 1px 8px rgba(11,19,43,0.06)",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
           }}
         >
           {/* Page Title */}
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <div>
-              <h2 style={{ fontWeight: 800, fontSize: "1rem", color: "#0B132B", lineHeight: 1.2 }}>
+              <h2 style={{ fontWeight: 800, fontSize: "1rem", color: "#FFFFFF", lineHeight: 1.2 }}>
                 {activeTab === "Dashboard" && "Operations Dashboard"}
                 {activeTab === "New Booking" && "New Reservation"}
                 {activeTab === "Payments" && "Payments & Billing"}
                 {activeTab === "Reports" && "Reports & Analytics"}
               </h2>
-              <p style={{ fontSize: "0.68rem", color: "#5C6B73", fontWeight: 500, marginTop: "2px" }}>
+              <p style={{ fontSize: "0.68rem", color: "#94A3B8", fontWeight: 500, marginTop: "2px" }}>
                 Manivtha Tours & Travels · QA Reviewer (ID: MNVT-OP-9944)
               </p>
             </div>
@@ -297,14 +299,14 @@ export default function Home() {
                   style={{
                     padding: "6px 12px",
                     borderRadius: "6px",
-                    border: "none",
                     cursor: "pointer",
                     fontSize: "0.7rem",
                     fontWeight: 700,
                     letterSpacing: "0.04em",
                     transition: "all 150ms ease",
-                    background: activeTab === item.id ? "#0077B6" : "#F1F5F9",
-                    color: activeTab === item.id ? "#fff" : "#3A506B",
+                    background: activeTab === item.id ? "#008542" : "#1E1E1E",
+                    color: activeTab === item.id ? "#fff" : "#94A3B8",
+                    border: activeTab === item.id ? "1px solid transparent" : "1px solid rgba(100, 116, 139, 0.3)",
                   }}
                 >
                   {item.label}
@@ -314,8 +316,8 @@ export default function Home() {
 
             {/* Live status dot */}
             <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-              <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#10B981", boxShadow: "0 0 6px #10B981" }} />
-              <span style={{ fontSize: "0.68rem", fontWeight: 600, color: "#5C6B73" }}>Live</span>
+              <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#008542", boxShadow: "0 0 6px #008542" }} />
+              <span style={{ fontSize: "0.68rem", fontWeight: 600, color: "#94A3B8" }}>Live</span>
             </div>
           </div>
         </header>
@@ -326,11 +328,12 @@ export default function Home() {
           {/* Welcome Banner */}
           <div
             style={{
-              background: "linear-gradient(135deg, #0B132B 0%, #1C2541 50%, #0B132B 100%)",
+              background: "linear-gradient(135deg, #121212 0%, #1a1a1a 50%, #121212 100%)",
               color: "#fff",
               padding: "28px 32px",
               borderRadius: "16px",
-              boxShadow: "0 8px 32px rgba(11,19,43,0.16)",
+              border: "1px solid rgba(100, 116, 139, 0.25)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -342,13 +345,13 @@ export default function Home() {
             }}
           >
             {/* Decorative circle */}
-            <div style={{ position: "absolute", right: "-40px", top: "-40px", width: "180px", height: "180px", borderRadius: "50%", background: "rgba(72,202,228,0.06)", pointerEvents: "none" }} />
-            <div style={{ position: "absolute", right: "60px", bottom: "-60px", width: "140px", height: "140px", borderRadius: "50%", background: "rgba(0,119,182,0.08)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", right: "-40px", top: "-40px", width: "180px", height: "180px", borderRadius: "50%", background: "rgba(0,133,66,0.06)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", right: "60px", bottom: "-60px", width: "140px", height: "140px", borderRadius: "50%", background: "rgba(0,133,66,0.08)", pointerEvents: "none" }} />
             <div>
               <h1 style={{ fontWeight: 900, fontSize: "1.5rem", letterSpacing: "-0.02em", lineHeight: 1.2, margin: 0 }}>
                 System Workspace Console
               </h1>
-              <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.8rem", marginTop: "6px", fontWeight: 500 }}>
+              <p style={{ color: "#94A3B8", fontSize: "0.8rem", marginTop: "6px", fontWeight: 500 }}>
                 Audit log dashboard with active alerts, navigation routing, and reports. QA Reviewer (ID: MNVT-OP-9944)
               </p>
             </div>
@@ -396,8 +399,8 @@ export default function Home() {
         {/* Footer */}
         <footer
           style={{
-            background: "#fff",
-            borderTop: "1px solid #E2E8F0",
+            background: "#121212",
+            borderTop: "1px solid rgba(100, 116, 139, 0.3)",
             padding: "16px 32px",
             display: "flex",
             alignItems: "center",
@@ -406,12 +409,12 @@ export default function Home() {
             gap: "8px",
           }}
         >
-          <p style={{ fontSize: "0.72rem", color: "#5C6B73", fontWeight: 500, margin: 0 }}>
+          <p style={{ fontSize: "0.72rem", color: "#94A3B8", fontWeight: 500, margin: 0 }}>
             © 2026 Manivtha Tours & Travels · QA Reviewer (ID: MNVT-OP-9944) · Google Antigravity Clean Design System
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#10B981" }} />
-            <span style={{ fontSize: "0.68rem", color: "#10B981", fontWeight: 600 }}>All Systems Operational</span>
+            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#008542" }} />
+            <span style={{ fontSize: "0.68rem", color: "#008542", fontWeight: 600 }}>All Systems Operational</span>
           </div>
         </footer>
       </div>

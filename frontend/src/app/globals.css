@@ -1,25 +1,41 @@
 @import "tailwindcss";
 
+/* ── New Dark Theme CSS Custom Properties ─────────────────────────── */
 :root {
-  --background: #F8FAFC;
-  --foreground: #0B132B;
+  --background: #000000;
+  --foreground: #FFFFFF;
+  --surface:    #121212;
+  --border:     #64748B;
+  --muted:      #94A3B8;
+  --accent-active:  #008542;
+  --accent-pending: #D97706;
 }
 
 @theme {
-  --color-navy-dark: #0B132B;
-  --color-navy-medium: #1C2541;
-  --color-navy-light: #3A506B;
-  --color-navy-slate: #5C6B73;
-  --color-crisp-white: #FFFFFF;
-  --color-crisp-offwhite: #F8FAFC;
-  --color-crisp-lightgray: #E2E8F0;
-  --color-accent-cyan: #48CAE4;
-  --color-accent-blue: #0077B6;
-  --color-accent-gold: #D4AF37;
-  
-  --font-sans: var(--font-geist-sans), Inter, sans-serif;
+  /* New dark palette tokens */
+  --color-background:     #000000;
+  --color-surface:        #121212;
+  --color-border-color:   #64748B;
+  --color-muted:          #94A3B8;
+  --color-accent-active:  #008542;
+  --color-accent-pending: #D97706;
+
+  /* Legacy token aliases — point to dark equivalents so old class names still work */
+  --color-navy-dark:        #000000;
+  --color-navy-medium:      #121212;
+  --color-navy-light:       #1E1E1E;
+  --color-navy-slate:       #94A3B8;
+  --color-crisp-white:      #FFFFFF;
+  --color-crisp-offwhite:   #121212;
+  --color-crisp-lightgray:  #64748B;
+  --color-accent-cyan:      #008542;
+  --color-accent-blue:      #008542;
+  --color-accent-gold:      #D97706;
+
+  --font-sans: "Inter", var(--font-geist-sans), sans-serif;
 }
 
+/* ── Base Styles ────────────────────────────────────────────────────── */
 body {
   background-color: var(--background);
   color: var(--foreground);
@@ -36,44 +52,48 @@ body {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    padding: 0.625rem 1.25rem; /* Enforced padding matching 8px grid (10px x 20px) */
-    border-radius: 0.5rem; /* 8px rounding */
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
     transition: all 200ms ease;
     cursor: pointer;
     text-align: center;
   }
-  
+
   .btn-primary {
-    background-color: #0B132B; /* Navy Dark */
+    background-color: #008542; /* accent-active green */
     color: #FFFFFF;
     border: 1px solid transparent;
   }
-  
+
   .btn-primary:hover {
-    background-color: #0077B6; /* Accent Blue */
+    background-color: #006b35;
   }
 
   .btn-secondary {
-    background-color: #FFFFFF;
-    color: #0B132B;
-    border: 2px solid #0B132B;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #0B132B;
+    background-color: #121212;
     color: #FFFFFF;
+    border: 2px solid #64748B;
+  }
+
+  .btn-secondary:hover {
+    background-color: #1E1E1E;
+    border-color: #94A3B8;
   }
 }
 
 /* ── 8px Spacing Grid Constraints Helpers ── */
-.gap-8px { gap: 0.5rem; }      /* 8px */
-.gap-16px { gap: 1rem; }       /* 16px */
-.gap-24px { gap: 1.5rem; }     /* 24px */
-.gap-32px { gap: 2rem; }       /* 32px */
+.gap-8px  { gap: 0.5rem; }
+.gap-16px { gap: 1rem; }
+.gap-24px { gap: 1.5rem; }
+.gap-32px { gap: 2rem; }
 
-.p-8px { padding: 0.5rem; }    /* 8px */
-.p-16px { padding: 1rem; }     /* 16px */
-.p-24px { padding: 1.5rem; }   /* 24px */
-.p-32px { padding: 2rem; }     /* 32px */
+.p-8px  { padding: 0.5rem; }
+.p-16px { padding: 1rem; }
+.p-24px { padding: 1.5rem; }
+.p-32px { padding: 2rem; }
 
-
+/* ── Dark scrollbar styling ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #000000; }
+::-webkit-scrollbar-thumb { background: #64748B; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }

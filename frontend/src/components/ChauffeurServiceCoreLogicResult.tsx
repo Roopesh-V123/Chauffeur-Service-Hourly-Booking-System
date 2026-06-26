@@ -218,112 +218,112 @@ export default function ChauffeurServiceCoreLogicResult() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-crisp-white/95 backdrop-blur-md border border-crisp-lightgray rounded-2xl shadow-xl p-6 sm:p-8 max-w-xl mx-auto transition-all duration-300 hover:shadow-2xl">
+    <div className="relative overflow-hidden bg-surface/95 backdrop-blur-md border border-border-color/30 rounded-2xl shadow-xl p-6 sm:p-8 max-w-xl mx-auto transition-all duration-300 hover:shadow-2xl text-white">
       {/* Visual Accent bar */}
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-navy-medium to-accent-blue" />
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent-active to-accent-pending" />
 
       {/* Header section */}
-      <div className="mb-6 pb-4 border-b border-crisp-lightgray flex justify-between items-center">
+      <div className="mb-6 pb-4 border-b border-border-color/30 flex justify-between items-center">
         <div>
-          <h2 className="text-lg font-black text-navy-dark tracking-tight">Fare Computation Output</h2>
-          <p className="text-[10px] text-navy-slate font-bold uppercase tracking-wider mt-0.5">
+          <h2 className="text-lg font-black text-white tracking-tight">Fare Computation Output</h2>
+          <p className="text-[10px] text-muted font-bold uppercase tracking-wider mt-0.5">
             System Lead: Lead Operator | ID: MNVT-OP-9944
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           {isOffline && (
-            <span className="text-[8px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded uppercase border border-amber-200">
+            <span className="text-[8px] bg-amber-950/40 text-amber-300 font-bold px-1.5 py-0.5 rounded uppercase border border-amber-800/40">
               Fallback
             </span>
           )}
           {/* Efficiency badge */}
-          <div className="flex items-center space-x-1.5 bg-emerald-50 border border-emerald-300 text-emerald-800 text-[10px] font-extrabold px-2.5 py-1.5 rounded-full uppercase tracking-wide">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="flex items-center space-x-1.5 bg-emerald-950/20 border border-emerald-800/30 text-emerald-400 text-[10px] font-extrabold px-2.5 py-1.5 rounded-full uppercase tracking-wide">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-active animate-pulse" />
             <span>↑ {calculation.rateEfficiency}% Efficient</span>
           </div>
         </div>
       </div>
 
       {/* Large Estimated Fare output display */}
-      <div className="text-center py-6 bg-crisp-offwhite rounded-xl border border-crisp-lightgray/80 mb-6">
-        <span className="text-[10px] text-navy-slate font-bold uppercase tracking-widest block mb-1">
+      <div className="text-center py-6 bg-background rounded-xl border border-border-color/20 mb-6">
+        <span className="text-[10px] text-muted font-bold uppercase tracking-widest block mb-1">
           Total Estimated Fare (incl. GST)
         </span>
-        <h3 className="text-4xl font-black text-navy-dark tracking-tight font-mono">
+        <h3 className="text-4xl font-black text-white tracking-tight font-mono">
           ₹{calculation.totalAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
         </h3>
-        <span className="text-[10px] text-accent-blue font-bold uppercase tracking-widest block mt-2">
+        <span className="text-[10px] text-accent-active font-bold uppercase tracking-widest block mt-2">
           Base: {calculation.vehicleCategory} (₹{calculation.baseRatePerHour}/hr)
         </span>
       </div>
 
       {/* Detailed breakdown items */}
-      <div className="space-y-3.5 mb-6 text-xs font-semibold text-navy-medium">
-        <div className="flex justify-between items-center pb-2 border-b border-crisp-lightgray/40">
-          <span className="text-navy-slate font-medium">Recorded Duration</span>
-          <span className="text-navy-dark">{calculation.rawHours} Hours</span>
+      <div className="space-y-3.5 mb-6 text-xs font-semibold text-white">
+        <div className="flex justify-between items-center pb-2 border-b border-border-color/20">
+          <span className="text-muted font-medium">Recorded Duration</span>
+          <span className="text-white">{calculation.rawHours} Hours</span>
         </div>
 
-        <div className="flex justify-between items-center pb-2 border-b border-crisp-lightgray/40">
-          <span className="text-navy-slate font-medium">Billed Duration (min 4 hrs)</span>
-          <span className="text-navy-dark">{calculation.billedHours} Hours</span>
+        <div className="flex justify-between items-center pb-2 border-b border-border-color/20">
+          <span className="text-muted font-medium">Billed Duration (min 4 hrs)</span>
+          <span className="text-white">{calculation.billedHours} Hours</span>
         </div>
 
-        <div className="flex justify-between items-center pb-2 border-b border-crisp-lightgray/40">
-          <span className="text-navy-slate font-medium">Base Fare Subtotal</span>
-          <span className="text-navy-dark font-mono">₹{calculation.baseFare.toFixed(2)}</span>
+        <div className="flex justify-between items-center pb-2 border-b border-border-color/20">
+          <span className="text-muted font-medium">Base Fare Subtotal</span>
+          <span className="text-white font-mono">₹{calculation.baseFare.toFixed(2)}</span>
         </div>
 
         {/* Dynamic Peak Surcharge item */}
         {calculation.isPeakHour && (
-          <div className="flex justify-between items-center pb-2 border-b border-crisp-lightgray/40">
-            <span className="text-navy-slate font-medium flex items-center">
+          <div className="flex justify-between items-center pb-2 border-b border-border-color/20">
+            <span className="text-muted font-medium flex items-center">
               Peak Traffic Surcharge (+15%)
-              <span className="ml-1.5 w-1.5 h-1.5 rounded-full bg-accent-gold" />
+              <span className="ml-1.5 w-1.5 h-1.5 rounded-full bg-accent-pending" />
             </span>
-            <span className="text-navy-dark font-mono">+₹{calculation.peakSurcharge.toFixed(2)}</span>
+            <span className="text-white font-mono">+₹{calculation.peakSurcharge.toFixed(2)}</span>
           </div>
         )}
 
         {/* Dynamic Night Surcharge item */}
         {calculation.nightSurcharge > 0 && (
-          <div className="flex justify-between items-center pb-2 border-b border-crisp-lightgray/40">
-            <span className="text-navy-slate font-medium flex items-center">
+          <div className="flex justify-between items-center pb-2 border-b border-border-color/20">
+            <span className="text-muted font-medium flex items-center">
               Night Time Surcharge (+20%)
-              <span className="ml-1.5 w-1.5 h-1.5 rounded-full bg-accent-cyan" />
+              <span className="ml-1.5 w-1.5 h-1.5 rounded-full bg-accent-active" />
             </span>
-            <span className="text-navy-dark font-mono">+₹{calculation.nightSurcharge.toFixed(2)}</span>
+            <span className="text-white font-mono">+₹{calculation.nightSurcharge.toFixed(2)}</span>
           </div>
         )}
 
-        <div className="flex justify-between items-center pb-2 border-b border-crisp-lightgray/40">
-          <span className="text-navy-slate font-medium">Calculated Tax (GST 18%)</span>
-          <span className="text-navy-dark font-mono">₹{calculation.gst.toFixed(2)}</span>
+        <div className="flex justify-between items-center pb-2 border-b border-border-color/20">
+          <span className="text-muted font-medium">Calculated Tax (GST 18%)</span>
+          <span className="text-white font-mono">₹{calculation.gst.toFixed(2)}</span>
         </div>
       </div>
 
       {/* Auth Error */}
       {authError && (
-        <div className="mb-4 p-4 bg-rose-50 border border-rose-200 text-rose-800 rounded-lg text-xs font-semibold flex items-start gap-2.5">
+        <div className="mb-4 p-4 bg-rose-950/20 border border-rose-900/40 text-rose-300 rounded-lg text-xs font-semibold flex items-start gap-2.5">
           <span>⚠️</span>
           <div>
-            <p className="font-extrabold text-rose-900">Invoice Authorization Failed</p>
-            <p className="mt-0.5 text-rose-700">{authError}</p>
+            <p className="font-extrabold text-rose-200">Invoice Authorization Failed</p>
+            <p className="mt-0.5 text-rose-400">{authError}</p>
           </div>
         </div>
       )}
 
       {/* Auth Success */}
       {authSuccess && (
-        <div className="mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs text-emerald-900">
-          <p className="font-extrabold flex items-center mb-1.5 text-emerald-800">
+        <div className="mb-4 p-4 bg-emerald-950/20 border border-emerald-800/30 rounded-lg text-xs text-emerald-300">
+          <p className="font-extrabold flex items-center mb-1.5 text-emerald-200">
             <span className="mr-2">✓</span> Invoice Authorized &amp; Payment Record Created
           </p>
           {invoiceId && (
-            <p className="font-semibold text-emerald-800">
+            <p className="font-semibold text-emerald-400">
               Payment UUID:{" "}
-              <span className="font-mono bg-emerald-100/60 px-1.5 py-0.5 rounded text-[10px] border border-emerald-200">
+              <span className="font-mono bg-[#1e1e1e] px-1.5 py-0.5 rounded text-[10px] border border-border-color/30 text-white">
                 {invoiceId}
               </span>
             </p>
@@ -335,7 +335,7 @@ export default function ChauffeurServiceCoreLogicResult() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <button
           onClick={handleDownloadLedger}
-          className="py-3 bg-crisp-offwhite hover:bg-crisp-lightgray/50 border border-crisp-lightgray text-navy-medium font-bold rounded-lg text-xs tracking-wider transition-all active:scale-[0.98]"
+          className="py-3 bg-[#1e1e1e] hover:bg-[#2a2a2a] border border-border-color/30 text-white font-bold rounded-lg text-xs tracking-wider transition-all active:scale-[0.98]"
         >
           Download Calculation Ledger
         </button>
@@ -344,8 +344,8 @@ export default function ChauffeurServiceCoreLogicResult() {
           disabled={isAuthorizing || authSuccess}
           className={`py-3 font-bold rounded-lg text-xs tracking-wider transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-2 ${
             isAuthorizing || authSuccess
-              ? "bg-navy-medium/60 text-crisp-white/80 cursor-not-allowed"
-              : "bg-navy-medium hover:bg-navy-dark text-crisp-white cursor-pointer"
+              ? "bg-[#1e1e1e]/60 text-white/80 cursor-not-allowed"
+              : "bg-accent-active hover:bg-accent-active/85 text-white cursor-pointer"
           }`}
         >
           {isAuthorizing ? (
