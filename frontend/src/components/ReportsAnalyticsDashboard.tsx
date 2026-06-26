@@ -1,8 +1,52 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ReportsSkeleton } from "./FeedbackStates";
 import { API_BASE_URL } from "@/app/api";
+
+/**
+ * @hook useCountUp
+ * @description Animates a number from 0 up to `target` over `duration` ms.
+ * Returns the current animated display value.
+ * Uses easeOutExpo for a premium deceleration feel.
+ */
+function useCountUp(target: number, duration = 1200, trigger = true): number {
+  const [current, setCurrent] = useState(0);
+  const rafRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (!trigger || target === 0) {
+      setCurrent(target);
+      return;
+    }
+
+    // Reset to 0 every time target changes so the count-up replays
+    setCurrent(0);
+    startTimeRef.current = null;
+
+    const easeOutExpo = (t: number) =>
+      t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+    const step = (timestamp: number) => {
+      if (!startTimeRef.current) startTimeRef.current = timestamp;
+      const elapsed = timestamp - startTimeRef.current;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutExpo(progress);
+      setCurrent(Math.round(eased * target));
+      if (progress < 1) {
+        rafRef.current = requestAnimationFrame(step);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(step);
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
+  }, [target, duration, trigger]);
+
+  return current;
+}
 
 // Author: QA Reviewer (ID: MNVT-OP-9944)
 // Day 18: REVIEW PRESENTATION 2 — Day 2 + Reports & Analytics Dashboard
@@ -546,8 +590,13 @@ export default function ReportsAnalyticsDashboard() {
     );
   };
 
-  const avgDuration = data && data.total_bookings > 0 
-    ? (data.total_hours / data.total_bookings).toFixed(1) 
+  // ── Count-up animation values (animate from 0 → real value on data load) ──
+  const animatedTotalBookings = useCountUp(data?.total_bookings ?? 0, 1200, !loading && !!data);
+  const animatedRevenue = useCountUp(data?.total_revenue ?? 0, 1500, !loading && !!data);
+  const animatedHours = useCountUp(data?.total_hours ?? 0, 1300, !loading && !!data);
+  // avgDuration derived from animated values:
+  const animatedAvgDuration = animatedTotalBookings > 0
+    ? (animatedHours / animatedTotalBookings).toFixed(1)
     : "0.0";
 
   return (
@@ -635,7 +684,7 @@ export default function ReportsAnalyticsDashboard() {
             <div className="bg-crisp-offwhite border border-crisp-lightgray rounded-lg p-5">
               <span className="text-[10px] text-navy-slate font-black uppercase tracking-wider block mb-1">Total Bookings</span>
               <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-navy-dark">{data?.total_bookings}</span>
+                <span className="text-2xl font-black text-navy-dark">{animatedTotalBookings.toLocaleString("en-IN")}</span>
                 <span className="text-[10px] text-emerald-600 font-bold">Live Status</span>
               </div>
             </div>
@@ -643,7 +692,7 @@ export default function ReportsAnalyticsDashboard() {
               <span className="text-[10px] text-navy-slate font-black uppercase tracking-wider block mb-1">Gross Revenue</span>
               <div className="flex items-baseline space-x-2">
                 <span className="text-2xl font-black text-navy-dark">
-                  ₹{data?.total_revenue.toLocaleString("en-IN")}
+                  ₹{animatedRevenue.toLocaleString("en-IN")}
                 </span>
                 <span className="text-[10px] text-accent-cyan font-bold">18% GST Inc.</span>
               </div>
@@ -651,14 +700,14 @@ export default function ReportsAnalyticsDashboard() {
             <div className="bg-crisp-offwhite border border-crisp-lightgray rounded-lg p-5">
               <span className="text-[10px] text-navy-slate font-black uppercase tracking-wider block mb-1">Billed Hours</span>
               <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-navy-dark">{data?.total_hours} hrs</span>
+                <span className="text-2xl font-black text-navy-dark">{animatedHours.toLocaleString("en-IN")} hrs</span>
                 <span className="text-[10px] text-navy-slate font-bold">Meter Duration</span>
               </div>
             </div>
             <div className="bg-crisp-offwhite border border-crisp-lightgray rounded-lg p-5">
               <span className="text-[10px] text-navy-slate font-black uppercase tracking-wider block mb-1">Average Duration</span>
               <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-black text-navy-dark">{avgDuration} hrs</span>
+                <span className="text-2xl font-black text-navy-dark">{animatedAvgDuration} hrs</span>
                 <span className="text-[10px] text-accent-gold font-bold">Per Booking</span>
               </div>
             </div>
