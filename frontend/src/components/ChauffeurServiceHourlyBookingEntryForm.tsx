@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "@/app/api";
 
 /**
  * Author: QA Reviewer (ID: MNVT-OP-9944)
@@ -76,7 +77,7 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
   useEffect(() => {
     async function loadVehicles() {
       try {
-        const response = await fetch("https://chauffeur-service-hourly-booking-system.onrender.com/api/vehicles");
+        const response = await fetch(`${API_BASE_URL}/api/vehicles`);
         if (!response.ok) throw new Error("API Offline");
         const json = await response.json();
         if (json.success && Array.isArray(json.data)) {
@@ -159,7 +160,7 @@ export default function ChauffeurServiceHourlyBookingEntryForm({ onBookingSaved 
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://chauffeur-service-hourly-booking-system.onrender.com/api/chauffeur_service_hourly_booking", {
+      const response = await fetch(`${API_BASE_URL}/api/chauffeur_service_hourly_booking`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

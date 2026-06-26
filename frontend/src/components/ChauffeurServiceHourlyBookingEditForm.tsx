@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "@/app/api";
 
 /**
  * @module ChauffeurServiceHourlyBookingEditForm
@@ -81,7 +82,7 @@ export default function ChauffeurServiceHourlyBookingEditForm({
 
     try {
       const response = await fetch(
-        `https://chauffeur-service-hourly-booking-system.onrender.com/api/chauffeur_service_hourly_booking/${booking.id}`,
+        `${API_BASE_URL}/api/chauffeur_service_hourly_booking/${booking.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

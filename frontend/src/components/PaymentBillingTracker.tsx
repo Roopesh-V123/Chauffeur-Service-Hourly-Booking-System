@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { PaymentTrackerSkeleton } from "./FeedbackStates";
+import { API_BASE_URL } from "@/app/api";
 
 /**
  * @component PaymentBillingTracker
@@ -69,7 +70,7 @@ export default function PaymentBillingTracker() {
       try {
         setIsLoadingBookings(true);
         const response = await fetch(
-          "https://chauffeur-service-hourly-booking-system.onrender.com/api/chauffeur_service_hourly_booking?limit=50"
+          `${API_BASE_URL}/api/chauffeur_service_hourly_booking?limit=50`
         );
         if (!response.ok) throw new Error("API offline");
         const json = await response.json();
@@ -132,7 +133,7 @@ export default function PaymentBillingTracker() {
         body.transaction_reference = transactionRef.trim();
       }
 
-      const response = await fetch("https://chauffeur-service-hourly-booking-system.onrender.com/api/payments", {
+      const response = await fetch(`${API_BASE_URL}/api/payments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

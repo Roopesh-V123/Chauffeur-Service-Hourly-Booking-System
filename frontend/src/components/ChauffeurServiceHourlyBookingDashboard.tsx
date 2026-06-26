@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "@/app/api";
 import { useRouter } from "next/navigation";
 import ChauffeurServiceHourlyBookingEditForm from "./ChauffeurServiceHourlyBookingEditForm";
 import ChauffeurServiceHourlyBookingDetail from "./ChauffeurServiceHourlyBookingDetail";
@@ -127,7 +128,7 @@ export default function ChauffeurServiceHourlyBookingDashboard() {
         if (searchQuery.trim()) queryParams.append("search", searchQuery.trim());
 
         const response = await fetch(
-          `https://chauffeur-service-hourly-booking-system.onrender.com/api/chauffeur_service_hourly_booking?${queryParams.toString()}`
+          `${API_BASE_URL}/api/chauffeur_service_hourly_booking?${queryParams.toString()}`
         );
         if (!response.ok) throw new Error("API Offline");
         const json = await response.json();
@@ -169,7 +170,7 @@ export default function ChauffeurServiceHourlyBookingDashboard() {
 
     try {
       const response = await fetch(
-        `https://chauffeur-service-hourly-booking-system.onrender.com/api/chauffeur_service_hourly_booking/${confirmAction.bookingId}/status`,
+        `${API_BASE_URL}/api/chauffeur_service_hourly_booking/${confirmAction.bookingId}/status`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

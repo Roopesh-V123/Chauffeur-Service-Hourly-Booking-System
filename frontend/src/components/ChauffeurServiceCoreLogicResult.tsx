@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "@/app/api";
 
 /**
  * Author: QA Reviewer (ID: MNVT-OP-9944)
@@ -109,7 +110,7 @@ export default function ChauffeurServiceCoreLogicResult() {
     async function fetchLatestBooking() {
       try {
         const response = await fetch(
-          "https://chauffeur-service-hourly-booking-system.onrender.com/api/chauffeur_service_hourly_booking?limit=1"
+          `${API_BASE_URL}/api/chauffeur_service_hourly_booking?limit=1`
         );
         if (!response.ok) throw new Error("API offline");
         const json = await response.json();
@@ -143,7 +144,7 @@ export default function ChauffeurServiceCoreLogicResult() {
     }
 
     try {
-      const response = await fetch("https://chauffeur-service-hourly-booking-system.onrender.com/api/payments", {
+      const response = await fetch(`${API_BASE_URL}/api/payments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

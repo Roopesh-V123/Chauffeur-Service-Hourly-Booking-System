@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { ReportsSkeleton } from "./FeedbackStates";
+import { API_BASE_URL } from "@/app/api";
 
 // Author: QA Reviewer (ID: MNVT-OP-9944)
 // Day 18: REVIEW PRESENTATION 2 — Day 2 + Reports & Analytics Dashboard
@@ -254,7 +255,7 @@ export default function ReportsAnalyticsDashboard() {
         if (toDate) queryParams.append("to", toDate);
 
         const response = await fetch(
-          `https://chauffeur-service-hourly-booking-system.onrender.com/api/reports/summary?${queryParams.toString()}`
+          `${API_BASE_URL}/api/reports/summary?${queryParams.toString()}`
         );
 
         if (!response.ok) {

@@ -18,6 +18,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { BookingPageSkeleton } from "@/components/FeedbackStates";
+import { API_BASE_URL } from "@/app/api";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TypeScript Interfaces — Deeply Nested Booking Schema
@@ -376,7 +377,7 @@ export default function BookingDetailPage() {
       setLoading(true);
       try {
         const res = await fetch(
-          `https://chauffeur-service-hourly-booking-system.onrender.com/api/chauffeur_service_hourly_booking/${bookingId}/detail`
+          `${API_BASE_URL}/api/chauffeur_service_hourly_booking/${bookingId}/detail`
         );
         if (!res.ok) throw new Error("API offline");
         const json = await res.json();

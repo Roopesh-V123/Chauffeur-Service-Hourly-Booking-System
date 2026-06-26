@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { KpiCardsSkeleton } from "./FeedbackStates";
+import { API_BASE_URL } from "@/app/api";
 
 /**
  * @hook useCountUp
@@ -111,7 +112,7 @@ export default function DashboardSummaryWidget() {
     async function fetchSummary() {
       try {
         setLoading(true);
-        const response = await fetch("https://chauffeur-service-hourly-booking-system.onrender.com/api/dashboard/summary");
+        const response = await fetch(`${API_BASE_URL}/api/dashboard/summary`);
         if (!response.ok) throw new Error("API offline");
         const json = await response.json();
         if (json.success && json.data) {
