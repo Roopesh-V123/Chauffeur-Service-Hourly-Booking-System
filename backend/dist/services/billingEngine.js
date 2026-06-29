@@ -10,7 +10,7 @@ exports.calculateBookingBill = calculateBookingBill;
  * @param {Date} createdDate The start date/time of the booking session
  * @param {string} vehicleCategory The category of the vehicle (Premium Sedan, Luxury SUV, Executive Van)
  * @returns {BillingCalculationResult} Object containing base rate, surcharges, subtotal, GST, and totalAmount
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  */
 function calculateBookingBill(bookingId, rawHours, createdDate, vehicleCategory = "Luxury SUV") {
     // 1. Validate hours input to prevent division-by-zero or negative ranges

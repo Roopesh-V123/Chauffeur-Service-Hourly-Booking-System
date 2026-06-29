@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const prisma_1 = require("../prisma");
 const zod_1 = require("zod");
-// Author: V.Roopesh (ID: 252U1R1249)
+// Author: QA Reviewer (ID: MNVT-OP-9944)
 // Route definitions for payment CRUD operations linked to chauffeur bookings
 const paymentRouter = (0, express_1.Router)();
 // Zod schema for payment creation
@@ -17,7 +17,7 @@ const createPaymentSchema = zod_1.z.object({
  * GET /api/payments
  * Lists all payment records with pagination and optional filtering by status and method.
  * Includes related booking data for cross-reference.
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  */
 paymentRouter.get("/", async (req, res) => {
     try {
@@ -80,7 +80,7 @@ paymentRouter.get("/", async (req, res) => {
  * POST /api/payments
  * Creates a new payment record linked to an existing booking.
  * Validates that the booking_id exists before persisting.
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  */
 paymentRouter.post("/", async (req, res) => {
     try {
@@ -131,6 +131,162 @@ paymentRouter.post("/", async (req, res) => {
             return;
         }
         console.error("[POST /api/payments] Payment creation failed:", error);
+        res.status(500).json({
+            success: false,
+            error: "Internal Server Error",
+            message: error.message
+        });
+    }
+});
+/**
+ * GET /api/payments/:id
+ * Fetches a single payment record by ID.
+ * @author QA Reviewer (ID: MNVT-OP-9944)
+ */
+paymentRouter.get("/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        if (!uuidRegex.test(id)) {
+            res.status(404).json({
+                success: false,
+                error: "Not Found",
+                message: "Payment record not found with the provided ID."
+            });
+            return;
+        }
+        const payment = await prisma_1.prisma.payment.findUnique({
+            where: { id },
+            include: {
+                booking: true
+            }
+        });
+        if (!payment) {
+            res.status(404).json({
+                success: false,
+                error: "Not Found",
+                message: "Payment record not found with the provided ID."
+            });
+            return;
+        }
+        res.status(200).json({
+            success: true,
+            data: payment
+        });
+    }
+    catch (error) {
+        console.error("[GET /api/payments/:id] Fetch payment failed:", error);
+        res.status(500).json({
+            success: false,
+            error: "Internal Server Error",
+            message: error.message
+        });
+    }
+});
+const updatePaymentSchema = zod_1.z.object({
+    amount: zod_1.z.number().positive("Payment amount must be a positive number").optional(),
+    status: zod_1.z.enum(["Pending", "Paid", "Failed"]).optional(),
+    transaction_reference: zod_1.z.string().min(3).optional().nullable(),
+});
+/**
+ * PUT /api/payments/:id
+ * Updates an existing payment record.
+ * @author QA Reviewer (ID: MNVT-OP-9944)
+ */
+paymentRouter.put("/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        if (!uuidRegex.test(id)) {
+            res.status(404).json({
+                success: false,
+                error: "Not Found",
+                message: "Payment record not found with the provided ID."
+            });
+            return;
+        }
+        const existing = await prisma_1.prisma.payment.findUnique({
+            where: { id }
+        });
+        if (!existing) {
+            res.status(404).json({
+                success: false,
+                error: "Not Found",
+                message: "Payment record not found with the provided ID."
+            });
+            return;
+        }
+        const body = updatePaymentSchema.parse(req.body);
+        const updatedPayment = await prisma_1.prisma.payment.update({
+            where: { id },
+            data: {
+                amount: body.amount !== undefined ? body.amount : existing.amount,
+                status: body.status !== undefined ? body.status : existing.status,
+                transactionReference: body.transaction_reference !== undefined ? body.transaction_reference : existing.transactionReference,
+                updatedAt: new Date()
+            }
+        });
+        res.status(200).json({
+            success: true,
+            message: "Payment record updated successfully.",
+            data: updatedPayment
+        });
+    }
+    catch (error) {
+        if (error instanceof zod_1.z.ZodError) {
+            res.status(400).json({
+                success: false,
+                error: "Validation Error",
+                details: error.flatten().fieldErrors
+            });
+            return;
+        }
+        console.error("[PUT /api/payments/:id] Payment update failed:", error);
+        res.status(500).json({
+            success: false,
+            error: "Internal Server Error",
+            message: error.message
+        });
+    }
+});
+/**
+ * DELETE /api/payments/:id
+ * Deletes an existing payment record.
+ * @author QA Reviewer (ID: MNVT-OP-9944)
+ */
+paymentRouter.delete("/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        if (!uuidRegex.test(id)) {
+            res.status(404).json({
+                success: false,
+                error: "Not Found",
+                message: "Payment record not found with the provided ID."
+            });
+            return;
+        }
+        const existing = await prisma_1.prisma.payment.findUnique({
+            where: { id }
+        });
+        if (!existing) {
+            res.status(404).json({
+                success: false,
+                error: "Not Found",
+                message: "Payment record not found with the provided ID."
+            });
+            return;
+        }
+        await prisma_1.prisma.payment.delete({
+            where: { id }
+        });
+        res.status(200).json({
+            success: true,
+            message: "Payment record deleted successfully."
+        });
+    }
+    catch (error) {
+        console.error("[DELETE /api/payments/:id] Payment deletion failed:", error);
         res.status(500).json({
             success: false,
             error: "Internal Server Error",

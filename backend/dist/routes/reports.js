@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const prisma_1 = require("../prisma");
 const billingEngine_1 = require("../services/billingEngine");
-// Author: V.Roopesh (ID: 252U1R1249)
+// Author: QA Reviewer (ID: MNVT-OP-9944)
 // Day 18: REVIEW PRESENTATION 2 — Day 2 + Reports & Analytics API
 const reportsRouter = (0, express_1.Router)();
 /**
@@ -15,6 +15,30 @@ reportsRouter.get("/summary", async (req, res) => {
     try {
         const fromStr = req.query.from;
         const toStr = req.query.to;
+        if (fromStr) {
+            const parsedFrom = new Date(fromStr);
+            if (isNaN(parsedFrom.getTime()) || parsedFrom.getFullYear() < 2020 || parsedFrom.getFullYear() > 2040) {
+                return res.status(400).json({ success: false, message: "From date must be valid and between 2020 and 2040" });
+            }
+        }
+        if (toStr) {
+            const parsedTo = new Date(toStr);
+            if (isNaN(parsedTo.getTime()) || parsedTo.getFullYear() < 2020 || parsedTo.getFullYear() > 2040) {
+                return res.status(400).json({ success: false, message: "To date must be valid and between 2020 and 2040" });
+            }
+        }
+        if (fromStr && toStr) {
+            const parsedFrom = new Date(fromStr);
+            const parsedTo = new Date(toStr);
+            if (parsedFrom > parsedTo) {
+                return res.status(400).json({ success: false, message: "From date cannot be after To date" });
+            }
+            const diffTime = Math.abs(parsedTo.getTime() - parsedFrom.getTime());
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if (diffDays > 366) {
+                return res.status(400).json({ success: false, message: "Date range cannot exceed 366 days" });
+            }
+        }
         const whereClause = {};
         if (fromStr || toStr) {
             whereClause.createdDate = {};

@@ -11,8 +11,9 @@ databases:
 services:
   - type: web
     name: chauffeur-booking-backend-api
-    env: node
+    runtime: node
     plan: free
+    healthCheckPath: /health
     rootDir: backend
     buildCommand: npm install && npx prisma generate && npm run build
     startCommand: npx prisma migrate deploy && npm start
@@ -22,6 +23,6 @@ services:
           name: chauffeur-prod-db
           property: connectionString
       - key: PORT
-        value: 5000
+        value: "5000"
       - key: NODE_ENV
-        value: production
+        value: "production"

@@ -4,7 +4,7 @@
  * @description Router implementing CRUD endpoints, dynamic pricing calculators, and status mutation lifecycles
  * for chauffeur hourly bookings in the PostgreSQL DB via Prisma.
  *
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  * @client Manivtha Tours & Travels
  */
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -33,7 +33,7 @@ const createBookingSchema = zod_1.z.object({
  * @description Lists bookings with pagination, filtering by status, and exact value search.
  * @param {Request} req - Express Request
  * @param {Response} res - Express Response
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  */
 bookingRouter.get("/", async (req, res) => {
     try {
@@ -91,7 +91,7 @@ bookingRouter.get("/", async (req, res) => {
  * @description Returns a single booking record by ID with UUID format safety checks.
  * @param {Request} req - Express Request
  * @param {Response} res - Express Response
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  */
 bookingRouter.get("/:id", async (req, res) => {
     try {
@@ -139,7 +139,7 @@ bookingRouter.get("/:id", async (req, res) => {
  * @description Fetches a complex joined booking record containing related customer, vehicle, and payment objects.
  * @param {Request} req - Express Request
  * @param {Response} res - Express Response
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  */
 bookingRouter.get("/:id/detail", async (req, res) => {
     try {
@@ -188,7 +188,7 @@ bookingRouter.get("/:id/detail", async (req, res) => {
  * @description Calculates dynamic pricing invoices (surcharges, GST) based on active DB trip parameters.
  * @param {Request} req - Express Request
  * @param {Response} res - Express Response
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  */
 bookingRouter.get("/:id/calculate", async (req, res) => {
     try {
@@ -236,7 +236,7 @@ bookingRouter.get("/:id/calculate", async (req, res) => {
  * @description Performs a full resource replacement of a booking record with Zod verification.
  * @param {Request} req - Express Request
  * @param {Response} res - Express Response
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  */
 bookingRouter.put("/:id", async (req, res) => {
     try {
@@ -312,7 +312,7 @@ const statusUpdateSchema = zod_1.z.object({
  * @description Mutates only the status flag of a booking, registering transition logs.
  * @param {Request} req - Express Request
  * @param {Response} res - Express Response
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  */
 bookingRouter.patch("/:id/status", async (req, res) => {
     try {
@@ -379,7 +379,7 @@ bookingRouter.patch("/:id/status", async (req, res) => {
  * @description Registers a new hourly booking. Automatically hooks up fallback customer and vehicle accounts if not specified.
  * @param {Request} req - Express Request
  * @param {Response} res - Express Response
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  */
 bookingRouter.post("/", async (req, res) => {
     try {
@@ -387,12 +387,12 @@ bookingRouter.post("/", async (req, res) => {
         let customerId = body.customer_id;
         if (!customerId) {
             const defaultCustomer = await prisma_1.prisma.customer.upsert({
-                where: { email: "roopesh@manivtha.com" },
+                where: { email: "operator@manivtha.com" },
                 update: {},
                 create: {
-                    name: "V.Roopesh",
-                    email: "roopesh@manivtha.com",
-                    phone: "252U1R1249",
+                    name: "Lead Operator",
+                    email: "operator@manivtha.com",
+                    phone: "MNVT-OP-9944",
                 }
             });
             customerId = defaultCustomer.id;
@@ -439,6 +439,54 @@ bookingRouter.post("/", async (req, res) => {
             return;
         }
         console.error("[POST /] Booking creation failed:", error);
+        res.status(500).json({
+            success: false,
+            error: "Internal Server Error",
+            message: error.message
+        });
+    }
+});
+/**
+ * @route DELETE /api/chauffeur_service_hourly_booking/:id
+ * @description Removes a booking record by ID with relational cascade checks.
+ * @param {Request} req - Express Request
+ * @param {Response} res - Express Response
+ * @author QA Reviewer (ID: MNVT-OP-9944)
+ */
+bookingRouter.delete("/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        if (!uuidRegex.test(id)) {
+            res.status(404).json({
+                success: false,
+                error: "Not Found",
+                message: "Booking record not found with the provided ID."
+            });
+            return;
+        }
+        const existing = await prisma_1.prisma.chauffeurServiceHourlyBooking.findUnique({
+            where: { id }
+        });
+        if (!existing) {
+            res.status(404).json({
+                success: false,
+                error: "Not Found",
+                message: "Booking record not found with the provided ID."
+            });
+            return;
+        }
+        await prisma_1.prisma.chauffeurServiceHourlyBooking.delete({
+            where: { id }
+        });
+        console.log(`[DELETE /:id] Booking ${id} deleted successfully.`);
+        res.status(200).json({
+            success: true,
+            message: "Booking record deleted successfully."
+        });
+    }
+    catch (error) {
+        console.error("[DELETE /:id] Booking deletion failed:", error);
         res.status(500).json({
             success: false,
             error: "Internal Server Error",

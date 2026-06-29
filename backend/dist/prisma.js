@@ -5,7 +5,7 @@
  * This ensures that a single database connection pool is shared across all Express modules,
  * preventing connection leakage on PostgreSQL servers during concurrent query activities.
  *
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  * @client Manivtha Tours & Travels
  */
 Object.defineProperty(exports, "__esModule", { value: true });

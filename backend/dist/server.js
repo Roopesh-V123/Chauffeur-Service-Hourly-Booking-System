@@ -5,7 +5,7 @@
  * Bootstraps routes, initializes middleware (CORS, body parser, input sanitizer), mounts controllers,
  * configures global error bounds, and binds to the specified port interface.
  *
- * @author V.Roopesh (ID: 252U1R1249)
+ * @author QA Reviewer (ID: MNVT-OP-9944)
  * @client Manivtha Tours & Travels
  */
 var __importDefault = (this && this.__importDefault) || function (mod) {
@@ -18,6 +18,8 @@ const booking_1 = __importDefault(require("./routes/booking"));
 const payments_1 = __importDefault(require("./routes/payments"));
 const reports_1 = __importDefault(require("./routes/reports"));
 const dashboard_1 = __importDefault(require("./routes/dashboard"));
+const customers_1 = __importDefault(require("./routes/customers"));
+const vehicles_1 = __importDefault(require("./routes/vehicles"));
 const errorAndSanitizer_1 = require("./middleware/errorAndSanitizer");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 5000;
@@ -32,6 +34,10 @@ app.use("/api/payments", payments_1.default);
 app.use("/api/reports", reports_1.default);
 // Mount the dashboard summary endpoint
 app.use("/api/dashboard", dashboard_1.default);
+// Mount the customer routes endpoint
+app.use("/api/customers", customers_1.default);
+// Mount the vehicle routes endpoint
+app.use("/api/vehicles", vehicles_1.default);
 // GET /health route returning exact requested payload
 app.get("/health", (req, res) => {
     res.status(200).json({
